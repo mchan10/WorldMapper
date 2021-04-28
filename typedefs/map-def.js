@@ -19,8 +19,11 @@ const typeDefs = gql `
 		owner: String!
 	}
 	extend type Query {
+		getAllMaps: [Map]
+		getMapById(_id: String!): Map
 	}
 	extend type Mutation {
+		_empy: String
 	}
 	input RegionInput {
 		_id: String!
@@ -36,7 +39,7 @@ const typeDefs = gql `
 		_id: String!
 		name: String!
 		owner: String!
-		region: Region!
+		region: RegionInput!
 	}
 `;
 
