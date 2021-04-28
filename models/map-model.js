@@ -1,14 +1,10 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Item = require('./item-model').schema;
+const Region = require('./region-model').schema;
 
-const todolistSchema = new Schema(
+const mapSchema = new Schema(
 	{
 		_id: {
 			type: ObjectId,
-			required: true
-		},
-		id: {
-			type: Number,
 			required: true
 		},
 		name: {
@@ -19,10 +15,10 @@ const todolistSchema = new Schema(
 			type: String,
 			required: true
 		},
-		items: [Item],
+		region: Region,
 	},
 	{ timestamps: true }
 );
 
-const Todolist = model('Todolist', todolistSchema);
-module.exports = Todolist;
+const Map = model('Map', mapSchema);
+module.exports = Map;
