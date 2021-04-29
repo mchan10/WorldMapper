@@ -6,7 +6,7 @@ const typeDefs = gql `
 		_id: String!
 		name: String!
 		owner: String!
-		region: Region!
+		region: String!
 	}
 	type Region{
 		_id: String!
@@ -39,7 +39,7 @@ const typeDefs = gql `
 		_id: String!
 		name: String!
 		owner: String!
-		region: RegionInput!
+		region: String!
 	}
 `;
 

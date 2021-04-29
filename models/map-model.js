@@ -1,5 +1,5 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Region = require('./region-model').schema;
+//const Region = require('./region-model').schema;
 
 const mapSchema = new Schema(
 	{
@@ -15,7 +15,10 @@ const mapSchema = new Schema(
 			type: String,
 			required: true
 		},
-		region: Region,
+		region: {
+			type: String,
+			required: true
+		}
 	},
 	{ timestamps: true }
 );
