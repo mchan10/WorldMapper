@@ -1,0 +1,6 @@
+@use 'node_modules/wt-frontend/build/global/theme' with (
+    $background-color: rgb(64, 69, 78),
+    $navbar-background-color: #353a44
+);
+@use 'node_modules/wt-frontend/build/global/wolfie';
+@use 'node_modules/wt-frontend/build/global/components';
