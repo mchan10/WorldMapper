@@ -34,8 +34,8 @@ const LoggedOut = (props) => {
                 </WButton>
             </WNavItem>
             <WNavItem hoverAnimation="lighten">
-                <WButton className="navbar-options" onClick={props.setShowCreate} wType="texted" hoverAnimation="text-primary"> 
-                    Sign Up 
+                <WButton className="navbar-options" onClick={() => props.toggleCreate(true)} wType="texted" hoverAnimation="text-primary"> 
+                    Create Account
                 </WButton>
             </WNavItem>
         </>
@@ -46,7 +46,7 @@ const NavbarButtons = (props) => {
     return(
         <>
         {
-            props.auth === false ? <LoggedOut toggleLogin={props.toggleLogin} setShowCreate={props.setShowCreate} />
+            props.auth === false ? <LoggedOut toggleLogin={props.toggleLogin} toggleCreate={props.toggleCreate} />
             : <LoggedIn fetchUser={props.fetchUser} setActiveList={props.setActiveList} logout={props.logout} />
         }
         </>

@@ -3,10 +3,12 @@ import { GET_DB_MAPS, GET_DB_REGIONS } from '../../cache/queries.js';
 import { WLayout, WLHeader, WLMain, WNavbar } from 'wt-frontend';
 import NavbarButtons from '../navbar/NavbarButtons.js';
 import Login from '../modals/Login.js';
+import CreateAccount from '../modals/CreateAccount.js'
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
     const [showLogin, toggleShowLogin] 	= useState(false);
+    const [showCreate, toggleShowCreate] = useState(false);
     
     return(
         <WLayout wLayout='header'>
@@ -20,7 +22,7 @@ const Homescreen = (props) => {
                     <ul>
                         <NavbarButtons
                             fetchUser={props.fetchUser} auth={auth}
-                            toggleLogin={toggleShowLogin}
+                            toggleLogin={toggleShowLogin} toggleCreate={toggleShowCreate}
                         >
                         </NavbarButtons>
                     </ul>
@@ -30,6 +32,7 @@ const Homescreen = (props) => {
 
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
+            {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
         </WLayout>
     );
 }
