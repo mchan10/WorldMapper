@@ -24,7 +24,7 @@ const typeDefs = gql `
 		getMapById(_id: String!): Map
 	}
 	extend type Mutation {
-		_empy: String
+		addNewMap: String!
 	}
 	input RegionInput {
 		_id: String!

@@ -20,8 +20,15 @@ export const REGISTER = gql`
 		}
 	}
 `;
+
 export const LOGOUT = gql`
 	mutation Logout {
 		logout 
 	}
 `;
+
+export const ADDNEWMAP = gql`
+	mutation AddNewMap{
+		addNewMap
+	}
+`
