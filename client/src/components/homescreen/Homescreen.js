@@ -7,6 +7,7 @@ import NavbarButtons from '../navbar/NavbarButtons.js';
 import Login from '../modals/Login.js';
 import CreateAccount from '../modals/CreateAccount.js';
 import MainContents from '../main/MainContents.js';
+import { withRouter } from 'react-router-dom';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -42,12 +43,17 @@ const Homescreen = (props) => {
         refetchData();
     }
 
+    const moveTo = (path) => {
+        props.history.push(path);
+    }
+
+
     return(
         <WLayout wLayout='header'>
             <WLHeader>
                 <WNavbar>
                     <ul>
-                        <li>
+                        <li onClick={() => {moveTo("/")}}>
                             World Mapper
                         </li>
                     </ul>
@@ -61,7 +67,7 @@ const Homescreen = (props) => {
                 </WNavbar>
             </WLHeader>
             <WLMain>
-                <MainContents auth = {auth} maps={maps} newMap={addNewMap}></MainContents>
+                <MainContents auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo}></MainContents>
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
@@ -69,4 +75,4 @@ const Homescreen = (props) => {
     );
 }
 
-export default Homescreen;
+export default withRouter(Homescreen);
