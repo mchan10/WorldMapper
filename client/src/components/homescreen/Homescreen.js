@@ -8,6 +8,7 @@ import Login from '../modals/Login.js';
 import CreateAccount from '../modals/CreateAccount.js';
 import MainContents from '../main/MainContents.js';
 import { withRouter } from 'react-router-dom';
+import NavbarNavigation from '../navbar/NavbarNavigation.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -79,8 +80,12 @@ const Homescreen = (props) => {
                 <WNavbar style={{backgroundColor:"black"}}>
                     <ul>
                         <WNavItem hoverAnimation="lighten" onClick={() => {moveTo("/")}}>
-                            World Mapper
+                            The World Data Mapper
                         </WNavItem>
+                        <WNavItem style={{padding:"25px"}}>
+
+                        </WNavItem>
+                        <NavbarNavigation moveTo={moveTo} regions={regions}></NavbarNavigation>
                     </ul>
                     <ul>
                         <NavbarButtons
