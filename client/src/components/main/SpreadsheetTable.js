@@ -10,7 +10,7 @@ const SpreadsheetTable = (props) => {
     return(
         <>
             {props.regions[currentRegion].children.map(region => (
-                <SpreadsheetEntry region={region} key={region._id} regions={props.regions}>
+                <SpreadsheetEntry region={region} key={region} regions={props.regions}>
                 </SpreadsheetEntry>
             ))}
         </>

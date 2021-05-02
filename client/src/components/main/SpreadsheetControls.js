@@ -7,7 +7,6 @@ const SpreadsheetControls = (props) => {
     const path = location.pathname;
     const split = path.split("/")
     const currentRegion = split[split.length - 1];
-    console.log(currentRegion);
     return(
         <WRow>
             <WCol size="1">

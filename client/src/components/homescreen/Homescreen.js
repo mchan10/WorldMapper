@@ -33,6 +33,7 @@ const Homescreen = (props) => {
             regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
         }
     }
+    console.log(regions,maps);
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
@@ -71,6 +72,8 @@ const Homescreen = (props) => {
     }
 
     return(
+        <>
+        {regq.loading || mapq.loading ? null :
         <WLayout wLayout='header'>
             <WLHeader>
                 <WNavbar style={{backgroundColor:"black"}}>
@@ -95,7 +98,8 @@ const Homescreen = (props) => {
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
-        </WLayout>
+        </WLayout>}
+        </>
     );
 }
 
