@@ -75,7 +75,7 @@ const Homescreen = (props) => {
                     </ul>
                 </WNavbar>
             </WLHeader>
-            <WLMain style={{backgroundColor:"grey"}}>
+            <WLMain style={{backgroundColor:"#4b4a4a"}}>
                 <MainContents 
                 auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions}>
                 </MainContents>

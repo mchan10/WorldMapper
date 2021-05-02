@@ -3,6 +3,7 @@ import { WLayout, WLHeader, WLMain, WLSide, WButton } from 'wt-frontend';
 import MapEntry from './MapEntry.js'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SpreadsheetTable from './SpreadsheetTable.js'
+import SpreadsheetControls from './SpreadsheetControls.js';
 
 const MainContents = (props) => {
     return (
@@ -34,6 +35,7 @@ const MainContents = (props) => {
                 <div style={{width:"80%", height:"85%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
                     <WLayout wLayout="header">
                         <WLHeader>
+                            <SpreadsheetControls regions={props.regions}></SpreadsheetControls>
                         </WLHeader>
                         <WLMain>
                             <div style={{backgroundColor:"#e3dede", width:"100%", height:"100%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
