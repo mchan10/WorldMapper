@@ -15,20 +15,20 @@ const SpreadsheetEntry = (props) => {
                 </WButton>
             </WCol>
             <WCol size="2">
-                <WButton onClick={props.moveTo}>
+                <WButton onClick={props.moveTo} hoverAnimation="darken">
                     {currentRegion.name}
                 </WButton>
             </WCol>
-            <WCol size="2">
+            <WCol size="2" style={{display:"grid", alignItems:"center"}}>
                 {currentRegion.capital}
             </WCol>
-            <WCol size="2">
+            <WCol size="2" style={{display:"grid", alignItems:"center"}}>
                 {currentRegion.leader}
             </WCol>
-            <WCol size="1">
+            <WCol size="1" style={{display:"grid", alignItems:"center"}}>
                 flag
             </WCol>
-            <WCol size="4">
+            <WCol size="4" style={{display:"grid", alignItems:"center"}}> 
                 {accumulator}
             </WCol>
         </WRow>
