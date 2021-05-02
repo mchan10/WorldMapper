@@ -2,6 +2,7 @@ import React            from 'react';
 import { WLayout, WLHeader, WLMain, WLSide, WButton } from 'wt-frontend';
 import MapEntry from './MapEntry.js'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import SpreadsheetTable from './SpreadsheetTable.js'
 
 const MainContents = (props) => {
     return (
@@ -40,7 +41,9 @@ const MainContents = (props) => {
                                     <WLHeader style={{backgroundColor:"red"}}>
                                     </WLHeader>
                                     <WLMain>
+                                        <SpreadsheetTable moveTo={props.moveTo} regions={props.regions}>
 
+                                        </SpreadsheetTable>
                                     </WLMain>
                                 </WLayout>
                             </div>

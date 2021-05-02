@@ -32,7 +32,6 @@ const Homescreen = (props) => {
             regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
         }
     }
-
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
@@ -78,8 +77,7 @@ const Homescreen = (props) => {
             </WLHeader>
             <WLMain style={{backgroundColor:"grey"}}>
                 <MainContents 
-                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}>
-
+                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions}>
                 </MainContents>
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
