@@ -28,8 +28,24 @@ const MainContents = (props) => {
                     </WLayout> 
                 </div>}>
             </Route>
-            <Route path='/viewer/' render={()=>
-                <></>
+            <Route path='/spreadsheet/' render={()=>
+                <div style={{width:"80%", height:"85%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
+                    <WLayout wLayout="header">
+                        <WLHeader>
+                        </WLHeader>
+                        <WLMain>
+                            <div style={{backgroundColor:"#e3dede", width:"100%", height:"100%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
+                                <WLayout wLayout="header">
+                                    <WLHeader style={{backgroundColor:"red"}}>
+                                    </WLHeader>
+                                    <WLMain>
+
+                                    </WLMain>
+                                </WLayout>
+                            </div>
+                        </WLMain>
+                    </WLayout>
+                </div>
             }>
             </Route>
         </Switch>

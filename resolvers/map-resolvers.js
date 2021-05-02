@@ -41,12 +41,24 @@ module.exports = {
 	Mutation: {
 		addNewMap: async (_, __, { req }) => {
 			const owner = new ObjectId(req.userId);
+			const regionId = new ObjectId();
+			const newRegion = new Region({
+				_id: regionId,
+				name: 'New Map',
+				owner: owner,
+				capital: 'No Capital',
+				leader: 'No Leader',
+				parent: '',
+				children: [],
+				landmarks: []
+			})
+			const addRegion = await newRegion.save();
 			const objectId = new ObjectId();
 			const newMap = new Map({
 				_id: objectId,
 				owner: owner,
 				name: 'New Map',
-				region: 'abc'
+				region: newRegion._id
 			})
 			const updated = await newMap.save();
 			if(updated) return newMap._id;

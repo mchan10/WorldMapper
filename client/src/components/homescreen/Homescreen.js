@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GET_DB_MAPS, GET_DB_REGIONS } from '../../cache/queries.js';
 import * as mutations from '../../cache/mutations.js';
-import { WLayout, WLHeader, WLMain, WNavbar } from 'wt-frontend';
+import { WLayout, WLHeader, WLMain, WNavbar, WNavItem } from 'wt-frontend';
 import { useMutation, useQuery } from '@apollo/client';
 import NavbarButtons from '../navbar/NavbarButtons.js';
 import Login from '../modals/Login.js';
@@ -25,16 +25,24 @@ const Homescreen = (props) => {
     const regq = useQuery(GET_DB_REGIONS);
     if(regq.loading) { console.log(regq.loading, 'loading'); }
 	if(regq.error) { console.log(regq.error, 'error'); }
-	if(regq.data) { regions = regq.data.getAllRegions; }
+	if(regq.data) {
+        for (let i = 0; i < regq.data.getAllRegions.length; i++){
+            regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
+        }
+    }
     
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
+        let newRegionData = []
         if (newmap.data){
-            maps = newmap.data;
+            maps = newmap.data.getAllMaps;
         }
         if (newreg.data){
-            regions = newreg.data;
+            for (let i = 0; i < regq.data.getAllRegions.length; i++){
+                newRegionData[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
+            }
+            regions = newRegionData;
         }
     }
 
@@ -51,11 +59,11 @@ const Homescreen = (props) => {
     return(
         <WLayout wLayout='header'>
             <WLHeader>
-                <WNavbar>
+                <WNavbar style={{backgroundColor:"black"}}>
                     <ul>
-                        <li onClick={() => {moveTo("/")}}>
+                        <WNavItem hoverAnimation="lighten" onClick={() => {moveTo("/")}}>
                             World Mapper
-                        </li>
+                        </WNavItem>
                     </ul>
                     <ul>
                         <NavbarButtons
@@ -66,7 +74,7 @@ const Homescreen = (props) => {
                     </ul>
                 </WNavbar>
             </WLHeader>
-            <WLMain>
+            <WLMain style={{backgroundColor:"grey"}}>
                 <MainContents auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo}></MainContents>
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
