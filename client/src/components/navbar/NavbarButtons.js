@@ -15,13 +15,20 @@ const LoggedIn = (props) => {
             //if (reset) props.setActiveList({});
         }
     };
-
+    console.log(props)
     return (
-        <WNavItem hoverAnimation="lighten">
-            <WButton className="navbar-options" onClick={handleLogout} wType="texted" hoverAnimation="text-primary">
-                <span style={{color:"white"}}>Logout</span>
-            </WButton>
-        </WNavItem >
+        <>
+            <WNavItem hoverAnimation="lighten">
+                <WButton onClick={() => props.toggleUpdate(true)} wType="texted">
+                    <span style={{color:"white"}}>{props.name}</span>
+                </WButton>
+            </WNavItem>
+            <WNavItem hoverAnimation="lighten">
+                <WButton onClick={handleLogout} wType="texted">
+                    <span style={{color:"white"}}>Logout</span>
+                </WButton>
+            </WNavItem>
+        </>
     );
 };
 
@@ -47,7 +54,7 @@ const NavbarButtons = (props) => {
         <>
         {
             props.auth === false ? <LoggedOut toggleLogin={props.toggleLogin} toggleCreate={props.toggleCreate} />
-            : <LoggedIn fetchUser={props.fetchUser} setActiveList={props.setActiveList} logout={props.logout} />
+            : <LoggedIn fetchUser={props.fetchUser} logout={props.logout} name={props.name} toggleUpdate={props.toggleUpdate}/>
         }
         </>
     )

@@ -16,6 +16,7 @@ const Homescreen = (props) => {
     let regions = [];
     const [showLogin, toggleShowLogin] 	= useState(false);
     const [showCreate, toggleShowCreate] = useState(false);
+    const [showUpdate, toggleShowUpdate] = useState(false);
     
     const [AddNewMap] = useMutation(mutations.ADD_NEW_MAP);
     const [ChangeMapName] = useMutation(mutations.CHANGE_MAP_NAME);
@@ -34,7 +35,7 @@ const Homescreen = (props) => {
             regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
         }
     }
-    console.log(regions,maps);
+    console.log(props.user);
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
@@ -89,8 +90,8 @@ const Homescreen = (props) => {
                     </ul>
                     <ul>
                         <NavbarButtons
-                            fetchUser={props.fetchUser} auth={auth}
-                            toggleLogin={toggleShowLogin} toggleCreate={toggleShowCreate}
+                            fetchUser={props.fetchUser} auth={auth} name={auth ? props.user.name : ""}
+                            toggleLogin={toggleShowLogin} toggleCreate={toggleShowCreate} toggleUpdate={toggleShowUpdate}
                         >
                         </NavbarButtons>
                     </ul>
