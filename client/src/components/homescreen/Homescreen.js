@@ -16,9 +16,10 @@ const Homescreen = (props) => {
     const [showLogin, toggleShowLogin] 	= useState(false);
     const [showCreate, toggleShowCreate] = useState(false);
     
-    const [AddNewMap] = useMutation(mutations.ADDNEWMAP);
-    const [ChangeMapName] = useMutation(mutations.CHANGEMAPNAME);
-    const [DeleteMap] = useMutation(mutations.DELETEMAP);
+    const [AddNewMap] = useMutation(mutations.ADD_NEW_MAP);
+    const [ChangeMapName] = useMutation(mutations.CHANGE_MAP_NAME);
+    const [DeleteMap] = useMutation(mutations.DELETE_MAP);
+    const [AddSubregion] = useMutation(mutations.ADD_SUBREGION);
     
     const mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -46,7 +47,6 @@ const Homescreen = (props) => {
             regions = newRegionData;
         }
     }
-
     const addNewMap = async () => {
         const { data } = await AddNewMap();
         refetchData();
@@ -56,6 +56,19 @@ const Homescreen = (props) => {
         props.history.push(path);
     }
 
+    const addSubregion = async (parentId) => {
+        let newRegion = {}
+        newRegion._id = "";
+        newRegion.name = "New Subregion";
+        newRegion.capital = "No Capital";
+        newRegion.leader = "No Leader";
+        newRegion.parent = "";
+        newRegion.children = [];
+        newRegion.landmarks = [];
+        newRegion.owner = "";
+        const data = await AddSubregion({variables:{_id: parentId, region: newRegion}});
+        refetchData();
+    }
 
     return(
         <WLayout wLayout='header'>
@@ -77,7 +90,7 @@ const Homescreen = (props) => {
             </WLHeader>
             <WLMain style={{backgroundColor:"#4b4a4a"}}>
                 <MainContents 
-                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions}>
+                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion}>
                 </MainContents>
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}

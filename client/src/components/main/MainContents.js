@@ -35,7 +35,7 @@ const MainContents = (props) => {
                 <div style={{width:"80%", height:"85%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
                     <WLayout wLayout="header">
                         <WLHeader>
-                            <SpreadsheetControls regions={props.regions}></SpreadsheetControls>
+                            <SpreadsheetControls regions={props.regions} addSubregion={props.addSubregion}></SpreadsheetControls>
                         </WLHeader>
                         <WLMain>
                             <div style={{backgroundColor:"#e3dede", width:"100%", height:"100%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>

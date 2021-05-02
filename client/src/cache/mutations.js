@@ -27,18 +27,24 @@ export const LOGOUT = gql`
 	}
 `;
 
-export const ADDNEWMAP = gql`
+export const ADD_NEW_MAP = gql`
 	mutation AddNewMap{
 		addNewMap
 	}
 `
-export const CHANGEMAPNAME = gql`
+export const CHANGE_MAP_NAME = gql`
 	mutation ChangeMapName($_id: String!, $name: String!){
 		changeMapName(_id: $_id, name: $name)
 	}
 `
-export const DELETEMAP = gql`
+export const DELETE_MAP = gql`
 	mutation DeleteMap($_id: String!){
 		deleteMap(_id: $_id)
+	}
+`
+
+export const ADD_SUBREGION = gql`
+	mutation AddSubregion($_id: String!, $region: RegionInput){
+		addSubregion(_id: $_id, region: $region)
 	}
 `

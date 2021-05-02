@@ -7,11 +7,12 @@ const SpreadsheetControls = (props) => {
     const path = location.pathname;
     const split = path.split("/")
     const currentRegion = split[split.length - 1];
+    console.log(currentRegion);
     return(
         <WRow>
             <WCol size="1">
                 <WButton>
-                    <i className="material-icons">add</i>
+                    <i className="material-icons" onClick={() => props.addSubregion(currentRegion)}>add</i>
                 </WButton>
             </WCol>
             <WCol size="1">

@@ -3,8 +3,9 @@ import { WRow, WCol, WButton } from 'wt-frontend';
 
 const SpreadsheetEntry = (props) => {
     let accumulator = "";
-    for (let i = 0; i < props.region.landmarks.length; i++){
-        accumulator += props.region.landmarks[i];
+    const currentRegion = props.regions[props.region]
+    for (let i = 0; i < currentRegion.landmarks.length; i++){
+        accumulator += currentRegion.landmarks[i];
     }
     return(
         <WRow>
@@ -14,13 +15,13 @@ const SpreadsheetEntry = (props) => {
                 </WButton>
             </WCol>
             <WCol size="2">
-                {props.region.name}
+                {currentRegion.name}
             </WCol>
             <WCol size="2">
-                {props.region.capital}
+                {currentRegion.capital}
             </WCol>
             <WCol size="2">
-                {props.region.leader}
+                {currentRegion.leader}
             </WCol>
             <WCol size="1">
                 flag

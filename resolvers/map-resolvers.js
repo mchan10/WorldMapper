@@ -91,6 +91,28 @@ module.exports = {
 			const deleted = await Map.deleteOne({_id: mapId});
 			if (deleted) return true;
 			return false;
+		},
+		addSubregion: async (_, args, { req }) => {
+			const { _id, region } = args;
+			const owner = new ObjectId(req.userId);
+			const parentId = _id;
+			const subregionId = new ObjectId();
+			if (region._id === ""){
+				region._id = subregionId;
+			}
+			region.owner = owner;
+			region.parent = parentId;
+			const schemaRegion = new Region({
+				...region
+			})
+			const foundParent = await Region.findOne({_id: parentId});
+			foundParent.children.push(subregionId);
+			const updateRegion = await Region.updateOne({_id: parentId}, {children: foundParent.children});
+			const updateSubregion = await schemaRegion.save();
+			if (updateSubregion){
+				return subregionId;
+			}
+			return "";
 		}
 	}
 }
