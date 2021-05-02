@@ -9,6 +9,7 @@ import CreateAccount from '../modals/CreateAccount.js';
 import MainContents from '../main/MainContents.js';
 import { withRouter } from 'react-router-dom';
 import NavbarNavigation from '../navbar/NavbarNavigation.js';
+import UpdateAccount from '../modals/UpdateAccount.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -104,6 +105,7 @@ const Homescreen = (props) => {
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
+            {showUpdate ? <UpdateAccount fetchUser={props.fetchUser} toggleUpdate={toggleShowUpdate} user={props.user}></UpdateAccount>: null}
         </WLayout>
         }
         </>

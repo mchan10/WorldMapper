@@ -15,7 +15,7 @@ const LoggedIn = (props) => {
             //if (reset) props.setActiveList({});
         }
     };
-    console.log(props)
+    
     return (
         <>
             <WNavItem hoverAnimation="lighten">

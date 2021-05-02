@@ -48,3 +48,9 @@ export const ADD_SUBREGION = gql`
 		addSubregion(_id: $_id, region: $region)
 	}
 `
+
+export const UPDATE_ACCOUNT = gql`
+	mutation UpdateAccount($name: String!, $email: String!, $password: String!){
+		updateAccount(name: $name, email: $email, password: $password)
+	}
+`
