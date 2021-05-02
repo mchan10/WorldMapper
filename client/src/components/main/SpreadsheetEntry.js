@@ -15,7 +15,9 @@ const SpreadsheetEntry = (props) => {
                 </WButton>
             </WCol>
             <WCol size="2">
-                {currentRegion.name}
+                <WButton onClick={props.moveTo}>
+                    {currentRegion.name}
+                </WButton>
             </WCol>
             <WCol size="2">
                 {currentRegion.capital}

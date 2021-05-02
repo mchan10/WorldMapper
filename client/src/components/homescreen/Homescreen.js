@@ -98,7 +98,8 @@ const Homescreen = (props) => {
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
-        </WLayout>}
+        </WLayout>
+        }
         </>
     );
 }
