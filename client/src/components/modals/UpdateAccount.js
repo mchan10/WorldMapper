@@ -26,7 +26,9 @@ const UpdateAccount = (props) => {
 		if (loading) { toggleLoading(true) };
 		if (error) { return `Error: ${error.message}` };
 		if (data) {
-			console.log(data)
+			if (data.updateAccount === false){
+                alert("Email in use already");
+            }
 			toggleLoading(false);
 			props.toggleUpdate(false);
             props.fetchUser();
@@ -38,7 +40,7 @@ const UpdateAccount = (props) => {
 
 		<WModal visible className="signup-modal">
 			<WMHeader className="modal-header" onClose={() => props.toggleUpdate(false)}>
-				Sign Up
+				Update Account
 			</WMHeader>
 
 			{
