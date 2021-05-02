@@ -18,6 +18,7 @@ const Homescreen = (props) => {
     
     const [AddNewMap] = useMutation(mutations.ADDNEWMAP);
     const [ChangeMapName] = useMutation(mutations.CHANGEMAPNAME);
+    const [DeleteMap] = useMutation(mutations.DELETEMAP);
     
     const mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -77,7 +78,7 @@ const Homescreen = (props) => {
             </WLHeader>
             <WLMain style={{backgroundColor:"grey"}}>
                 <MainContents 
-                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData}>
+                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}>
 
                 </MainContents>
             </WLMain>

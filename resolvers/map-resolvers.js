@@ -75,6 +75,22 @@ module.exports = {
 				return name;
 			}
 			return "";
+		},
+		deleteMap: async (_, args) => {
+			const { _id } = args;
+			const mapId = _id;
+			const foundMap = await Map.findOne({_id: mapId});
+			let stack = [];
+			stack.push(foundMap.region);
+			while (stack.length > 0){
+				let regionId = stack.pop();
+				let region = await Region.findOne({_id: regionId});
+				stack.push(...(region.children));
+				let data = await Region.deleteOne({_id: regionId});
+			}
+			const deleted = await Map.deleteOne({_id: mapId});
+			if (deleted) return true;
+			return false;
 		}
 	}
 }
