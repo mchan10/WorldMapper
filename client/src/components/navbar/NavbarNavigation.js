@@ -15,7 +15,7 @@ const NavbarNavigation = (props) => {
             namePath[i-2] = [props.regions[split[i]].name, namePath[i-3][1] + "/" + split[i]]
         }  
     }
-    namePath.shift();
+    namePath.pop();
     return(
         <>
         {namePath.map(pair => (
