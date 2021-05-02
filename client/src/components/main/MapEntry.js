@@ -5,9 +5,11 @@ const MapEntry = (props) => {
 
     const [editingName, toggleEditName] = useState(false);
 
-    const handleNameChange = (e) => {
+    const handleNameChange = async (e) => {
         const newName = e.target.value;
+        const old = await props.changeMapName({variables:{_id: props.map._id, name: newName}});
         toggleEditName(false);
+        props.refetch();
     }
 
     return(

@@ -17,6 +17,7 @@ const Homescreen = (props) => {
     const [showCreate, toggleShowCreate] = useState(false);
     
     const [AddNewMap] = useMutation(mutations.ADDNEWMAP);
+    const [ChangeMapName] = useMutation(mutations.CHANGEMAPNAME);
     
     const mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -30,7 +31,7 @@ const Homescreen = (props) => {
             regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
         }
     }
-    
+
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
@@ -75,7 +76,10 @@ const Homescreen = (props) => {
                 </WNavbar>
             </WLHeader>
             <WLMain style={{backgroundColor:"grey"}}>
-                <MainContents auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo}></MainContents>
+                <MainContents 
+                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData}>
+
+                </MainContents>
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}

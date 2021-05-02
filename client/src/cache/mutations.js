@@ -32,3 +32,8 @@ export const ADDNEWMAP = gql`
 		addNewMap
 	}
 `
+export const CHANGEMAPNAME = gql`
+	mutation ChangeMapName($_id: String!, $name: String!){
+		changeMapName(_id: $_id, name: $name)
+	}
+`

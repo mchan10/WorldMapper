@@ -63,6 +63,18 @@ module.exports = {
 			const updated = await newMap.save();
 			if(updated) return newMap._id;
 			else return ('Could not add map');
+		},
+		changeMapName: async (_, args) => {
+			const { _id, name} = args;
+			const mapId = _id;
+			const foundMap = await Map.findOne({_id: mapId});
+			const regionId = foundMap.region;
+			const updateRegion = await Region.updateOne({_id: regionId}, {name: name});
+			const updateMap = await Map.updateOne({_id: mapId}, {name: name});
+			if (updateMap){
+				return name;
+			}
+			return "";
 		}
 	}
 }
