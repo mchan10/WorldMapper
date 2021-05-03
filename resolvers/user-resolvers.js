@@ -84,7 +84,7 @@ module.exports = {
 			if(!_id) { return false }
 			const { name, email, password } = args;
 			const alreadyRegistered = await User.findOne({email: email});
-			if (alreadyRegistered && (alreadyRegistered._id != _id)){return false}
+			if (alreadyRegistered && (String(alreadyRegistered._id) !== String(_id))){return false}
 			const hashed = await bcrypt.hash(password, 10);
 			const save = await User.updateOne({_id: _id}, {name: name, email: email, password: hashed});
 			return true;
