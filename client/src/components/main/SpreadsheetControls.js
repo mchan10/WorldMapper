@@ -21,7 +21,7 @@ const SpreadsheetControls = (props) => {
                 <i className="material-icons" style={{color:"white", cursor:"pointer"}}>redo</i>
             </WCol>
             <WCol size="6">
-                <span style={{color:"white"}}>{"Region Name: " + props.regions[currentRegion].name}</span>
+                <div style={{color:"white", textAlign:"center"}}>{"Region Name: " + props.regions[currentRegion].name}</div>
             </WCol>
         </WRow>
     );
