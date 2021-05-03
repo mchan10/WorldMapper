@@ -8,6 +8,7 @@ import SpreadsheetHeader from './SpreadsheetHeader.js';
 import ViewerHeader from './ViewerHeader.js';
 import ViewerRegion from './ViewerRegion.js';
 import ViewerLandmarks from './ViewerLandmarks.js';
+import { PromiseProvider } from 'mongoose';
 
 const MainContents = (props) => {
     return (
@@ -23,7 +24,7 @@ const MainContents = (props) => {
                         <WLMain style={{backgroundColor:"#f76565"}}>
                             {props.maps.map(entry => (
                                 <MapEntry 
-                                map={entry} key={entry._id} moveTo={props.moveTo} changeMapName={props.changeMapName} refetch={props.refetch} deleteMap={props.deleteMap}>
+                                map={entry} key={entry._id} moveTo={props.moveTo} changeMapName={props.changeMapName} refetch={props.refetch} deleteMap={props.deleteMap} changeDeleteFunc={props.changeDeleteFunc} toggleDelete={props.toggleDelete}>
                                 </MapEntry>
                             ))}
                         </WLMain>

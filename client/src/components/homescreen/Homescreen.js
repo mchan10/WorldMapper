@@ -10,6 +10,7 @@ import MainContents from '../main/MainContents.js';
 import { withRouter } from 'react-router-dom';
 import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
+import Delete from '../modals/Delete.js'
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -18,6 +19,8 @@ const Homescreen = (props) => {
     const [showLogin, toggleShowLogin] 	= useState(false);
     const [showCreate, toggleShowCreate] = useState(false);
     const [showUpdate, toggleShowUpdate] = useState(false);
+    const [showDelete, toggleShowDelete] = useState(false);
+    const [deleteFunc, changeDeleteFunc] = useState(function (){});
     
     const [AddNewMap] = useMutation(mutations.ADD_NEW_MAP);
     const [ChangeMapName] = useMutation(mutations.CHANGE_MAP_NAME);
@@ -100,12 +103,13 @@ const Homescreen = (props) => {
             </WLHeader>
             <WLMain style={{backgroundColor:"#4b4a4a"}}>
                 <MainContents 
-                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion}>
+                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc}>
                 </MainContents>
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
             {showUpdate ? <UpdateAccount fetchUser={props.fetchUser} toggleUpdate={toggleShowUpdate} user={props.user}></UpdateAccount>: null}
+            {showDelete ? <Delete toggleDelete={toggleShowDelete} deleteFunc={deleteFunc}></Delete>: null}
         </WLayout>
         }
         </>

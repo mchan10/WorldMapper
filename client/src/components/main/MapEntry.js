@@ -17,6 +17,11 @@ const MapEntry = (props) => {
         props.refetch();
     }
 
+    const deleteFunc = async () => {
+        props.toggleDelete(true);
+        props.changeDeleteFunc(() => handleDeleteMap);
+    }
+
     return(
         <WRow style={{height:"8%"}}>
             {editingName?
@@ -34,7 +39,7 @@ const MapEntry = (props) => {
                 <WButton style={{padding:"0", backgroundColor:"#f76565",width:"50%"}} hoverAnimation="darken" onClick={() => {toggleEditName(true)}}>
                     <i className="material-icons">edit</i> 
                 </WButton> 
-                <WButton style={{padding:"0", backgroundColor:"#f76565",width:"50%"}} hoverAnimation="darken" onClick={handleDeleteMap}>
+                <WButton style={{padding:"0", backgroundColor:"#f76565",width:"50%"}} hoverAnimation="darken" onClick={deleteFunc}>
                     <i className="material-icons">delete</i> 
                 </WButton> 
             </WCol>
