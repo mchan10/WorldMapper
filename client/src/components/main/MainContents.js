@@ -1,5 +1,5 @@
 import React            from 'react';
-import { WLayout, WLHeader, WLMain, WLSide, WButton } from 'wt-frontend';
+import { WLayout, WLHeader, WLMain, WLSide, WButton, WCard, WCContent, WCFooter } from 'wt-frontend';
 import MapEntry from './MapEntry.js'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SpreadsheetTable from './SpreadsheetTable.js'
@@ -29,9 +29,16 @@ const MainContents = (props) => {
                             ))}
                         </WLMain>
                         <WLSide>
-                            <WButton style={{backgroundColor:"red", width:"100%", float:"bottom", textAlign:"center"}} onClick={() => props.newMap()}>
-                                Create New Map
-                            </WButton>
+                            <WCard wLayout="content-footer" style={{width:"100%", height:"100%"}}>
+                                <WCContent>
+                                    img
+                                </WCContent>
+                                <WCFooter>
+                                    <WButton style={{backgroundColor:"red", width:"100%", justifyContent:"center", height:"100%"}} onClick={() => props.newMap()}>
+                                        Create New Map
+                                    </WButton>
+                                </WCFooter>
+                            </WCard>
                         </WLSide>
                     </WLayout> 
                 </div>}>

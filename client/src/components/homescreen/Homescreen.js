@@ -102,9 +102,13 @@ const Homescreen = (props) => {
                 </WNavbar>
             </WLHeader>
             <WLMain style={{backgroundColor:"#4b4a4a"}}>
-                {auth ? <MainContents 
+                {auth ? 
+                <MainContents 
                 auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc}>
-                </MainContents>: null}
+                </MainContents>:
+                <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
+                    Welcome To the World Data Mapper
+                </div>}
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin} refetch={refetchData}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
