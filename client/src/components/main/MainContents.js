@@ -21,7 +21,7 @@ const MainContents = (props) => {
                         <WLHeader style={{color:"white", textAlign:"center"}}>
                             Your Maps
                         </WLHeader>
-                        <WLMain style={{backgroundColor:"#f76565"}}>
+                        <WLMain style={{backgroundColor:"#f76565", overflow:"auto"}}>
                             {props.maps.map(entry => (
                                 <MapEntry 
                                 map={entry} key={entry._id} moveTo={props.moveTo} changeMapName={props.changeMapName} refetch={props.refetch} deleteMap={props.deleteMap} changeDeleteFunc={props.changeDeleteFunc} toggleDelete={props.toggleDelete}>
