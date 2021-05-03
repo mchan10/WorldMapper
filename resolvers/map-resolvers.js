@@ -39,12 +39,13 @@ module.exports = {
 		},
 	},
 	Mutation: {
-		addNewMap: async (_, __, { req }) => {
+		addNewMap: async (_, args, { req }) => {
+			const { name } = args;
 			const owner = new ObjectId(req.userId);
 			const regionId = new ObjectId();
 			const newRegion = new Region({
 				_id: regionId,
-				name: 'New Map',
+				name: name,
 				owner: owner,
 				capital: 'No Capital',
 				leader: 'No Leader',
@@ -57,11 +58,11 @@ module.exports = {
 			const newMap = new Map({
 				_id: objectId,
 				owner: owner,
-				name: 'New Map',
+				name: name,
 				region: newRegion._id
 			})
 			const updated = await newMap.save();
-			if(updated) return newMap._id;
+			if(updated) return newRegion._id;
 			else return ('Could not add map');
 		},
 		changeMapName: async (_, args) => {

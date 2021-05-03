@@ -34,7 +34,7 @@ const MainContents = (props) => {
                                     img
                                 </WCContent>
                                 <WCFooter>
-                                    <WButton style={{backgroundColor:"red", width:"100%", justifyContent:"center", height:"100%"}} onClick={() => props.newMap()}>
+                                    <WButton style={{backgroundColor:"red", width:"100%", justifyContent:"center", height:"100%"}} onClick={() => props.toggleCreateMap(true)}>
                                         Create New Map
                                     </WButton>
                                 </WCFooter>

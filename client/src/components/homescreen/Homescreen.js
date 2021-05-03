@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom';
 import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
+import CreateMap from '../modals/CreateMap.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -21,6 +22,7 @@ const Homescreen = (props) => {
     const [showUpdate, toggleShowUpdate] = useState(false);
     const [showDelete, toggleShowDelete] = useState(false);
     const [deleteFunc, changeDeleteFunc] = useState(function (){});
+    const [showCreateMap, toggleShowCreateMap] = useState(false);
 
     const [AddNewMap] = useMutation(mutations.ADD_NEW_MAP);
     const [ChangeMapName] = useMutation(mutations.CHANGE_MAP_NAME);
@@ -57,9 +59,10 @@ const Homescreen = (props) => {
             refetchData();
         }
     }
-    const addNewMap = async () => {
-        const { data } = await AddNewMap();
-        refetchData();
+    const addNewMap = async (name) => {
+        const { data } = await AddNewMap({variables: {name: name}});
+        await refetchData();
+        moveTo("/spreadsheet/" + data.addNewMap);
     }
 
     const moveTo = (path) => {
@@ -107,7 +110,7 @@ const Homescreen = (props) => {
             <WLMain style={{backgroundColor:"#4b4a4a"}}>
                 {auth ? 
                 <MainContents 
-                auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc}>
+                auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}>
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper
@@ -117,6 +120,7 @@ const Homescreen = (props) => {
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
             {showUpdate ? <UpdateAccount fetchUser={props.fetchUser} toggleUpdate={toggleShowUpdate} user={props.user}></UpdateAccount>: null}
             {showDelete ? <Delete toggleDelete={toggleShowDelete} deleteFunc={deleteFunc}></Delete>: null}
+            {showCreateMap ? <CreateMap createMap={addNewMap} toggleCreateMap={toggleShowCreateMap}></CreateMap>: null}
         </WLayout>
         }
         </>

@@ -28,8 +28,8 @@ export const LOGOUT = gql`
 `;
 
 export const ADD_NEW_MAP = gql`
-	mutation AddNewMap{
-		addNewMap
+	mutation AddNewMap($name: String!){
+		addNewMap(name: $name)
 	}
 `
 export const CHANGE_MAP_NAME = gql`
