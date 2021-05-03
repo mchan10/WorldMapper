@@ -6,6 +6,7 @@ import SpreadsheetTable from './SpreadsheetTable.js'
 import SpreadsheetControls from './SpreadsheetControls.js';
 import SpreadsheetHeader from './SpreadsheetHeader.js';
 import ViewerHeader from './ViewerHeader.js';
+import ViewerRegion from './ViewerRegion.js';
 
 const MainContents = (props) => {
     return (
@@ -62,7 +63,8 @@ const MainContents = (props) => {
                     <WLayout wLayout="header-lside">
                         <ViewerHeader>
                         </ViewerHeader>
-
+                        <ViewerRegion regions={props.regions} moveTo={props.moveTo}>
+                        </ViewerRegion>
                     </WLayout>
                 </div>    
             }>
