@@ -26,7 +26,7 @@ const MapEntry = (props) => {
         <WRow style={{height:"8%"}}>
             {editingName?
                 <WCol size="11" style={{borderStyle:"hidden solid solid hidden"}}>
-                    <WInput style={{height:"100%"}} defaultValue={props.map.name} onBlur={handleNameChange}>
+                    <WInput style={{height:"100%"}} defaultValue={props.map.name} onBlur={handleNameChange} autoFocus>
 
                     </WInput>
                 </WCol>
@@ -35,11 +35,11 @@ const MapEntry = (props) => {
                     {props.map.name}
                 </WCol>
             }
-            <WCol size="1"> 
-                <WButton style={{padding:"0", backgroundColor:"#f76565",width:"50%"}} hoverAnimation="darken" onClick={() => {toggleEditName(true)}}>
+            <WCol size="1" style={{backgroundColor:"#f76565"}}> 
+                <WButton style={{padding:"0",width:"50%"}} hoverAnimation="lighten" onClick={() => {toggleEditName(true)}} wType="texted">
                     <i className="material-icons">edit</i> 
                 </WButton> 
-                <WButton style={{padding:"0", backgroundColor:"#f76565",width:"50%"}} hoverAnimation="darken" onClick={deleteFunc}>
+                <WButton style={{padding:"0", width:"50%"}} hoverAnimation="lighten" onClick={deleteFunc} wType="texted">
                     <i className="material-icons">delete</i> 
                 </WButton> 
             </WCol>

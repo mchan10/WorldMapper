@@ -25,8 +25,10 @@ const SpreadsheetEntry = (props) => {
             <WCol size="1" style={{display:"grid", alignItems:"center"}}>
                 flag
             </WCol>
-            <WCol size="4" style={{display:"grid", alignItems:"center"}} onClick={props.moveViewer}> 
-                {currentRegion.landmarks.join()}
+            <WCol size="4" style={{display:"grid", alignItems:"center"}}> 
+                <WButton onClick={props.moveViewer} hoverAnimation="darken" style={{height:"100%"}}>
+                    {currentRegion.landmarks.join()}
+                </WButton>
             </WCol>
         </WRow>
     );
