@@ -14,9 +14,8 @@ module.exports = {
 		getAllMaps: async (_, __, { req }) => {
 			const _id = new ObjectId(req.userId);
 			if(!_id) { return([])};
-			const maps = await Map.find({owner: _id}).sort({updatedAt:-1});
+			const maps = await Map.find({owner: _id}).sort({lastAccessed:-1});
 			if(maps) return (maps);
-
 		},
 
 		getAllRegions: async (_, __, { req }) => {
@@ -55,11 +54,14 @@ module.exports = {
 			})
 			const addRegion = await newRegion.save();
 			const objectId = new ObjectId();
+			const timeElapsed = Date.now();
+    		const today = new Date(timeElapsed);
 			const newMap = new Map({
 				_id: objectId,
 				owner: owner,
 				name: name,
-				region: newRegion._id
+				region: newRegion._id,
+				lastAccessed: today
 			})
 			const updated = await newMap.save();
 			if(updated) return newRegion._id;
@@ -114,6 +116,14 @@ module.exports = {
 				return subregionId;
 			}
 			return "";
+		},
+		updateAccess: async (_, args) => {
+			const { _id } = args;
+			const timeElapsed = Date.now();
+    		const today = new Date(timeElapsed);
+			const update = await Map.updateOne({_id: _id}, {lastAccessed: today});
+			if (update){ return true}
+			return false;
 		}
 	}
 }

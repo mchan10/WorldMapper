@@ -54,3 +54,9 @@ export const UPDATE_ACCOUNT = gql`
 		updateAccount(name: $name, email: $email, password: $password)
 	}
 `
+
+export const UPDATE_ACCESS = gql`
+	mutation UpdateAccess($_id: String!){
+		updateAccess(_id: $_id)
+	}
+`

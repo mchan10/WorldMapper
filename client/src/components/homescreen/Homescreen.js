@@ -28,7 +28,8 @@ const Homescreen = (props) => {
     const [ChangeMapName] = useMutation(mutations.CHANGE_MAP_NAME);
     const [DeleteMap] = useMutation(mutations.DELETE_MAP);
     const [AddSubregion] = useMutation(mutations.ADD_SUBREGION);
-    
+    const [UpdateAccess] = useMutation(mutations.UPDATE_ACCESS);
+
     const mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
 	if(mapq.error) { console.log(mapq.error, 'error'); }
@@ -110,7 +111,9 @@ const Homescreen = (props) => {
             <WLMain style={{backgroundColor:"#4b4a4a"}}>
                 {auth ? 
                 <MainContents 
-                auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}>
+                auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} 
+                addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
+                updateAccess={UpdateAccess}>
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper

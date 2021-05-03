@@ -18,9 +18,12 @@ const mapSchema = new Schema(
 		region: {
 			type: String,
 			required: true
+		},
+		lastAccessed: {
+			type: Date,
+			required: true
 		}
-	},
-	{ timestamps: true }
+	}
 );
 
 const Map = model('Map', mapSchema);

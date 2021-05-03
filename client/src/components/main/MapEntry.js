@@ -22,6 +22,12 @@ const MapEntry = (props) => {
         props.changeDeleteFunc(() => handleDeleteMap);
     }
 
+    const handleMove = async () => {
+        props.moveTo('/spreadsheet/' + props.map.region)
+        props.updateAccess({variables: {_id: props.map._id}})
+        props.refetch();
+    }
+
     return(
         <WRow style={{height:"8%"}}>
             {editingName?
@@ -31,7 +37,7 @@ const MapEntry = (props) => {
                     </WInput>
                 </WCol>
                 :
-                <WCol size="11" style={{borderStyle:"hidden solid solid hidden"}} onClick={() => {props.moveTo('/spreadsheet/' + props.map.region)}}>
+                <WCol size="11" style={{borderStyle:"hidden solid solid hidden"}} onClick={handleMove}>
                     {props.map.name}
                 </WCol>
             }
