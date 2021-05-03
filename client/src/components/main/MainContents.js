@@ -47,7 +47,7 @@ const MainContents = (props) => {
                                     <WLHeader style={{backgroundColor:"red"}}>
                                         <SpreadsheetHeader></SpreadsheetHeader>
                                     </WLHeader>
-                                    <WLMain>
+                                    <WLMain style={{overflow:"auto"}}>
                                         <SpreadsheetTable moveTo={props.moveTo} regions={props.regions}>
 
                                         </SpreadsheetTable>

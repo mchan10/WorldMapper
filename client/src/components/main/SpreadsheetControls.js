@@ -10,19 +10,15 @@ const SpreadsheetControls = (props) => {
     return(
         <WRow>
             <WCol size="1">
-                <WButton onClick={() => props.addSubregion(currentRegion)}>
-                    <i className="material-icons">add</i>
-                </WButton>
+                <i onClick={() => props.addSubregion(currentRegion)} className="material-icons" style={{color:"green", cursor:"pointer"}}>
+                    add
+                </i>
             </WCol>
             <WCol size="1">
-                <WButton>
-                    <i className="material-icons">undo</i>
-                </WButton>
+                <i className="material-icons" style={{color:"white", cursor:"pointer"}}>undo</i>
             </WCol>
             <WCol size="1">
-                <WButton>
-                    <i className="material-icons">redo</i>
-                </WButton>
+                <i className="material-icons" style={{color:"white", cursor:"pointer"}}>redo</i>
             </WCol>
             <WCol size="6">
                 <span style={{color:"white"}}>{"Region Name: " + props.regions[currentRegion].name}</span>
