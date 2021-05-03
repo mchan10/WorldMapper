@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SpreadsheetTable from './SpreadsheetTable.js'
 import SpreadsheetControls from './SpreadsheetControls.js';
 import SpreadsheetHeader from './SpreadsheetHeader.js';
+import ViewerHeader from './ViewerHeader.js';
 
 const MainContents = (props) => {
     return (
@@ -54,6 +55,16 @@ const MainContents = (props) => {
                         </WLMain>
                     </WLayout>
                 </div>
+            }>
+            </Route>
+            <Route path='/viewer/' render={() => 
+                <div style={{width:"80%", height:"85%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
+                    <WLayout wLayout="header-lside">
+                        <ViewerHeader>
+                        </ViewerHeader>
+
+                    </WLayout>
+                </div>    
             }>
             </Route>
         </Switch>

@@ -28,7 +28,7 @@ const SpreadsheetEntry = (props) => {
             <WCol size="1" style={{display:"grid", alignItems:"center"}}>
                 flag
             </WCol>
-            <WCol size="4" style={{display:"grid", alignItems:"center"}}> 
+            <WCol size="4" style={{display:"grid", alignItems:"center"}} onClick={props.moveViewer}> 
                 {accumulator}
             </WCol>
         </WRow>

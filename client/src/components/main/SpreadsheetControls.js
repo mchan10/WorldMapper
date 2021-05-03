@@ -10,8 +10,8 @@ const SpreadsheetControls = (props) => {
     return(
         <WRow>
             <WCol size="1">
-                <WButton>
-                    <i className="material-icons" onClick={() => props.addSubregion(currentRegion)}>add</i>
+                <WButton onClick={() => props.addSubregion(currentRegion)}>
+                    <i className="material-icons">add</i>
                 </WButton>
             </WCol>
             <WCol size="1">
