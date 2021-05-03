@@ -1,5 +1,5 @@
 import React from 'react';
-import { WLMain, WLayout, WLFooter, WLHeader } from 'wt-frontend';
+import { WLMain, WLayout, WLFooter, WLHeader, WRow, WCol, WInput } from 'wt-frontend';
 import ViewerEntry from './ViewerEntry.js';
 import { useLocation } from 'react-router-dom'; 
 
@@ -35,6 +35,16 @@ const ViewerLandmarks = (props) => {
                         <ViewerEntry name={landmark} key={index} delete={false}></ViewerEntry>
                     ))}
                 </WLMain>
+                <WLFooter>
+                    <WRow>
+                        <WCol size="1">
+                            <i className="material-icons" style={{color:"green"}}>add</i>
+                        </WCol>
+                        <WCol size="11">
+                            <WInput></WInput>
+                        </WCol>
+                    </WRow>
+                </WLFooter>
             </WLayout>
         </WLMain>
     );
