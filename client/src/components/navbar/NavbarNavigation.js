@@ -19,7 +19,7 @@ const NavbarNavigation = (props) => {
     return(
         <>
         {namePath.map(pair => (
-            <WNavItem hoverAnimation="lighten" onClick={() => {props.moveTo(pair[1])}} key={pair[1]}>
+            <WNavItem hoverAnimation="lighten" onClick={() => {props.moveTo(pair[1])}} key={pair[1]} style={{cursor:"pointer"}}>
                 {pair[0] + ">"}
             </WNavItem>
         ))}

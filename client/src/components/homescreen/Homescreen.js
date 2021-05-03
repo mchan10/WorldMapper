@@ -87,7 +87,7 @@ const Homescreen = (props) => {
             <WLHeader>
                 <WNavbar style={{backgroundColor:"black"}}>
                     <ul>
-                        <WNavItem hoverAnimation="lighten" onClick={() => {moveTo("/")}}>
+                        <WNavItem hoverAnimation="lighten" onClick={() => {moveTo("/")}} style={{color:"red", cursor:"pointer"}}>
                             The World Data Mapper
                         </WNavItem>
                         <WNavItem style={{padding:"25px"}}>

@@ -8,7 +8,6 @@ const LoggedIn = (props) => {
 	const [Logout] = useMutation(LOGOUT);
 
     const handleLogout = async (e) => {
-        
         Logout();
         props.moveTo("/");
         const { data } = await props.fetchUser();
@@ -21,7 +20,7 @@ const LoggedIn = (props) => {
         <>
             <WNavItem hoverAnimation="lighten">
                 <WButton onClick={() => props.toggleUpdate(true)} wType="texted">
-                    <span style={{color:"white"}}>{props.name}</span>
+                    <span style={{color:"purple"}}>{props.name}</span>
                 </WButton>
             </WNavItem>
             <WNavItem hoverAnimation="lighten">
