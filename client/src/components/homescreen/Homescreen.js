@@ -53,6 +53,9 @@ const Homescreen = (props) => {
             }
             regions = newRegionData;
         }
+        if(auth && (!newmap || !newreg)){
+            refetchData();
+        }
     }
     const addNewMap = async () => {
         const { data } = await AddNewMap();
