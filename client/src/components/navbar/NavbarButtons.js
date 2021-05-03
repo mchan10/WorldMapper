@@ -8,11 +8,12 @@ const LoggedIn = (props) => {
 	const [Logout] = useMutation(LOGOUT);
 
     const handleLogout = async (e) => {
+        
         Logout();
+        props.moveTo("/");
         const { data } = await props.fetchUser();
         if (data) {
             let reset = await client.resetStore();
-            props.moveTo("/");
         }
     };
 
