@@ -76,7 +76,7 @@ const UpdateAccount = (props) => {
 					</WMMain>
 			}
 			<WMFooter style={{backgroundColor:"black"}}>
-				<WButton style={{backgroundColor:"red",color:"black"}}
+				<WButton style={{backgroundColor:"white",color:"black"}}
 				className="modal-button" onClick={handleUpdateAccount} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
 					Submit
 				</WButton>

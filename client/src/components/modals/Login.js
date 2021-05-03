@@ -2,7 +2,7 @@ import React, { useState } 	from 'react';
 import { LOGIN } 			from '../../cache/mutations';
 import { useMutation }    	from '@apollo/client';
 
-import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput } from 'wt-frontend';
+import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput, WRow, WCol } from 'wt-frontend';
 
 const Login = (props) => {
 	const [input, setInput] = useState({ email: '', password: '' });
@@ -28,28 +28,36 @@ const Login = (props) => {
 		if (data) {
 			props.fetchUser();
 			//props.refetchTodos();
-			toggleLoading(false)
-			props.toggleLogin(false)
+			toggleLoading(false);
+			props.refetch();
+			props.toggleLogin(false);
 		};
 	};
 
 	return (
         // Replace div with WModal
 		<WModal visible className="login-modal">
-			<WMHeader className="modal-header" onClose={() => props.toggleLogin(false)}>
+			<WMHeader className="modal-header" onClose={() => props.toggleLogin(false)} style={{backgroundColor:"red", textAlign:"center", color:"white"}}>
 				Login
 			</WMHeader>
 
 			{
 				loading ? <div />
-					: <WMMain className="main-login-modal">
-
-						<WInput className="modal-input" onBlur={updateInput} name='email' labelAnimation="up" barAnimation="solid" labelText="Email Address" wType="outlined" inputType='text' />
+					: <WMMain className="main-login-modal" style={{backgroundColor:"black"}}>
+						<WRow>
+							<WCol size="6">
+								<WInput className="modal-input" onBlur={updateInput} name='email' labelAnimation="up" barAnimation="solid" labelText="Email Address" wType="outlined" inputType='text' style={{backgroundColor:"white"}}/>
+							</WCol>
+						</WRow>
 						<div className="modal-spacer">&nbsp;</div>
-						<WInput className="modal-input" onBlur={updateInput} name='password' labelAnimation="up" barAnimation="solid" labelText="Password" wType="outlined" inputType='password' />
+						<WRow>
+							<WCol size="6">
+							<WInput className="modal-input" onBlur={updateInput} name='password' labelAnimation="up" barAnimation="solid" labelText="Password" wType="outlined" inputType='password' style={{backgroundColor:"white"}}/>
+							</WCol>
+						</WRow>
 
 						{
-							showErr ? <div className='modal-error'>
+							showErr ? <div className='modal-error' style={{color:"white"}}>
 								{errorMsg}
 							</div>
 								: <div className='modal-error'>&nbsp;</div>
@@ -57,8 +65,8 @@ const Login = (props) => {
 
 					</WMMain>
 			}
-			<WMFooter>
-				<WButton className="modal-button" onClick={handleLogin} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
+			<WMFooter style={{backgroundColor:"black"}}>
+				<WButton className="modal-button" onClick={handleLogin} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary" style={{backgroundColor:"white", color:"black"}}>
 					Login
 				</WButton>
 			</WMFooter>

@@ -12,7 +12,7 @@ const LoggedIn = (props) => {
         const { data } = await props.fetchUser();
         if (data) {
             let reset = await client.resetStore();
-            //if (reset) props.setActiveList({});
+            props.moveTo("/");
         }
     };
 
@@ -54,7 +54,7 @@ const NavbarButtons = (props) => {
         <>
         {
             props.auth === false ? <LoggedOut toggleLogin={props.toggleLogin} toggleCreate={props.toggleCreate} />
-            : <LoggedIn fetchUser={props.fetchUser} logout={props.logout} name={props.name} toggleUpdate={props.toggleUpdate}/>
+            : <LoggedIn fetchUser={props.fetchUser} logout={props.logout} name={props.name} toggleUpdate={props.toggleUpdate} moveTo={props.moveTo}/>
         }
         </>
     )

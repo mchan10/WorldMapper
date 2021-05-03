@@ -44,16 +44,16 @@ const CreateAccount = (props) => {
         // Replace div with WModal
 
 		<WModal visible className="signup-modal">
-			<WMHeader className="modal-header" onClose={() => props.toggleCreate(false)}>
+			<WMHeader className="modal-header" onClose={() => props.toggleCreate(false)} style={{backgroundColor:"red", color:"white", textAlign:"center"}}>
 				Sign Up
 			</WMHeader>
 
 			{
 				loading ? <div />
-					: <WMMain>
+					: <WMMain style={{backgroundColor:"black"}}>
 						<WRow className="modal-col-gap signup-modal">
 							<WCol size="6">
-								<WInput 
+								<WInput style={{backgroundColor:"white"}}
 									className="" onBlur={updateInput} name="name" labelAnimation="up" 
 									barAnimation="solid" labelText="Name" wType="outlined" inputType="text" 
 								/>
@@ -63,7 +63,7 @@ const CreateAccount = (props) => {
 						<div className="modal-spacer">&nbsp;</div>
 						<WRow className="modal-col-gap signup-modal">
 							<WCol size="6">
-								<WInput 
+								<WInput style={{backgroundColor:"white"}}
 									className="modal-input" onBlur={updateInput} name="email" labelAnimation="up" 
 									barAnimation="solid" labelText="Email Address" wType="outlined" inputType="text" 
 								/>
@@ -73,7 +73,7 @@ const CreateAccount = (props) => {
 						<div className="modal-spacer">&nbsp;</div>
 						<WRow className="modal-col-gap signup-modal">
 							<WCol size="6">
-								<WInput 
+								<WInput style={{backgroundColor:"white"}}
 									className="modal-input" onBlur={updateInput} name="password" labelAnimation="up" 
 									barAnimation="solid" labelText="Password" wType="outlined" inputType="password" 
 								/>
@@ -81,8 +81,8 @@ const CreateAccount = (props) => {
 						</WRow>
 					</WMMain>
 			}
-			<WMFooter>
-				<WButton className="modal-button" onClick={handleCreateAccount} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
+			<WMFooter style={{backgroundColor:"black"}}>
+				<WButton className="modal-button" onClick={handleCreateAccount} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary" style={{backgroundColor:"white", color:"black"}}>
 					Submit
 				</WButton>
 			</WMFooter>	

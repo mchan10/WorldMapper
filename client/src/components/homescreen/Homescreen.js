@@ -21,7 +21,7 @@ const Homescreen = (props) => {
     const [showUpdate, toggleShowUpdate] = useState(false);
     const [showDelete, toggleShowDelete] = useState(false);
     const [deleteFunc, changeDeleteFunc] = useState(function (){});
-    
+
     const [AddNewMap] = useMutation(mutations.ADD_NEW_MAP);
     const [ChangeMapName] = useMutation(mutations.CHANGE_MAP_NAME);
     const [DeleteMap] = useMutation(mutations.DELETE_MAP);
@@ -44,10 +44,10 @@ const Homescreen = (props) => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
         let newRegionData = []
-        if (newmap.data){
+        if (newmap && newmap.data){
             maps = newmap.data.getAllMaps;
         }
-        if (newreg.data){
+        if (newreg && newreg.data){
             for (let i = 0; i < regq.data.getAllRegions.length; i++){
                 newRegionData[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
             }
@@ -94,7 +94,7 @@ const Homescreen = (props) => {
                     </ul>
                     <ul>
                         <NavbarButtons
-                            fetchUser={props.fetchUser} auth={auth} name={auth ? props.user.name : ""}
+                            fetchUser={props.fetchUser} auth={auth} name={auth ? props.user.name : ""}  moveTo={moveTo}
                             toggleLogin={toggleShowLogin} toggleCreate={toggleShowCreate} toggleUpdate={toggleShowUpdate}
                         >
                         </NavbarButtons>
@@ -102,11 +102,11 @@ const Homescreen = (props) => {
                 </WNavbar>
             </WLHeader>
             <WLMain style={{backgroundColor:"#4b4a4a"}}>
-                <MainContents 
+                {auth ? <MainContents 
                 auth={auth} maps={maps} newMap={addNewMap} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc}>
-                </MainContents>
+                </MainContents>: null}
             </WLMain>
-            {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin}> </Login> : null}
+            {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin} refetch={refetchData}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
             {showUpdate ? <UpdateAccount fetchUser={props.fetchUser} toggleUpdate={toggleShowUpdate} user={props.user}></UpdateAccount>: null}
             {showDelete ? <Delete toggleDelete={toggleShowDelete} deleteFunc={deleteFunc}></Delete>: null}
