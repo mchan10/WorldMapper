@@ -39,17 +39,17 @@ const UpdateAccount = (props) => {
         // Replace div with WModal
 
 		<WModal visible className="signup-modal">
-			<WMHeader className="modal-header" onClose={() => props.toggleUpdate(false)}>
+			<WMHeader className="modal-header" onClose={() => props.toggleUpdate(false)} style={{backgroundColor:"red", color:"white", textAlign:"center"}}>
 				Update Account
 			</WMHeader>
 
 			{
 				loading ? <div />
-					: <WMMain>
+					: <WMMain style={{backgroundColor:"black"}}>
 						<WRow className="modal-col-gap signup-modal">
 							<WCol size="6">
-								<WInput 
-									className="" onBlur={updateInput} name="name" labelAnimation="up" defaultValue={props.user.name}
+								<WInput style={{backgroundColor:"white"}} 
+									className="" onBlur={updateInput} name="name" labelAnimation="shrink" defaultValue={props.user.name}
 									barAnimation="solid" labelText="Name" wType="outlined" inputType="text" 
 								/>
 							</WCol>
@@ -58,8 +58,8 @@ const UpdateAccount = (props) => {
 						<div className="modal-spacer">&nbsp;</div>
                         <WRow className="modal-col-gap signup-modal">
 							<WCol size="6">
-                            <WInput 
-                                className="modal-input" onBlur={updateInput} name="email" labelAnimation="up" defaultValue={props.user.email}
+                            <WInput style={{backgroundColor:"white"}}
+                                className="modal-input" onBlur={updateInput} name="email" labelAnimation="shrink" defaultValue={props.user.email}
                                 barAnimation="solid" labelText="Email Address" wType="outlined" inputType="text" 
                             />
 							</WCol>
@@ -67,7 +67,7 @@ const UpdateAccount = (props) => {
 						<div className="modal-spacer">&nbsp;</div>
                         <WRow className="modal-col-gap signup-modal">
 							<WCol size="6">
-                            <WInput 
+                            <WInput style={{backgroundColor:"white"}}
                                 className="modal-input" onBlur={updateInput} name="password" labelAnimation="up" 
                                 barAnimation="solid" labelText="Password" wType="outlined" inputType="password" 
                             />
@@ -75,8 +75,9 @@ const UpdateAccount = (props) => {
 						</WRow>
 					</WMMain>
 			}
-			<WMFooter>
-				<WButton className="modal-button" onClick={handleUpdateAccount} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
+			<WMFooter style={{backgroundColor:"black"}}>
+				<WButton style={{backgroundColor:"red",color:"black"}}
+				className="modal-button" onClick={handleUpdateAccount} span clickAnimation="ripple-light" hoverAnimation="darken" shape="rounded" color="primary">
 					Submit
 				</WButton>
 			</WMFooter>	
