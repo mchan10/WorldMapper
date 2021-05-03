@@ -6,24 +6,16 @@ const ViewerHeader = (props) => {
         <WLHeader>
             <WRow>
                 <WCol size="1">
-                    <WButton>
-                        <i className="material-icons">undo</i>
-                    </WButton>
+                    <i className="material-icons">undo</i>
                 </WCol>
                 <WCol size="1">
-                    <WButton>
-                        <i className="material-icons">redo</i>
-                    </WButton>
+                    <i className="material-icons">redo</i>
                 </WCol>
                 <WCol size="1">
-                    <WButton>
-                        <i className="material-icons">arrow_back</i>
-                    </WButton>
+                    <i className="material-icons">arrow_back</i>
                 </WCol>
                 <WCol size="1">
-                    <WButton>
-                        <i className="material-icons">arrow_forward</i>
-                    </WButton>
+                    <i className="material-icons">arrow_forward</i>
                 </WCol>
             </WRow>    
         </WLHeader>

@@ -7,6 +7,7 @@ import SpreadsheetControls from './SpreadsheetControls.js';
 import SpreadsheetHeader from './SpreadsheetHeader.js';
 import ViewerHeader from './ViewerHeader.js';
 import ViewerRegion from './ViewerRegion.js';
+import ViewerLandmarks from './ViewerLandmarks.js';
 
 const MainContents = (props) => {
     return (
@@ -65,6 +66,8 @@ const MainContents = (props) => {
                         </ViewerHeader>
                         <ViewerRegion regions={props.regions} moveTo={props.moveTo}>
                         </ViewerRegion>
+                        <ViewerLandmarks regions={props.regions}>
+                        </ViewerLandmarks>
                     </WLayout>
                 </div>    
             }>

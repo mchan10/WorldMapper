@@ -4,9 +4,6 @@ import { WRow, WCol, WButton } from 'wt-frontend';
 const SpreadsheetEntry = (props) => {
     let accumulator = "";
     const currentRegion = props.regions[props.region]
-    for (let i = 0; i < currentRegion.landmarks.length; i++){
-        accumulator += currentRegion.landmarks[i];
-    }
     return(
         <WRow>
             <WCol size="1">
@@ -29,7 +26,7 @@ const SpreadsheetEntry = (props) => {
                 flag
             </WCol>
             <WCol size="4" style={{display:"grid", alignItems:"center"}} onClick={props.moveViewer}> 
-                {accumulator}
+                {currentRegion.landmarks.join()}
             </WCol>
         </WRow>
     );

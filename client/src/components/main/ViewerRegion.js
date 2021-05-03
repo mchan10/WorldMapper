@@ -15,14 +15,14 @@ const ViewerRegion = (props) => {
     parentPath = parentPath.replace("viewer","spreadsheet");
     return(
         <WLSide>
-            <WCard wLayout="media-content" style={{height:"100%"}}>
+            <WCard wLayout="media-content" style={{height:"100%",width:"100%"}}>
                 <WCMedia>image</WCMedia>
                 <WCContent style={{backgroundColor:"#4b4a4a"}}>
                     <div>&nbsp;</div>
                     <div style={{color:"white",fontWeight:"bold"}}>{"Region Name: " + region.name}</div>
                     <div>&nbsp;</div>
                     <div style={{color:"white",fontWeight:"bold"}}>{"Parent Region: "} 
-                        <span onClick={() => props.moveTo(parentPath)} style={{color:"blue"}}>
+                        <span onClick={() => props.moveTo(parentPath)} style={{color:"blue",cursor:"pointer"}}>
                             {parentRegion.name}
                         </span>
                     </div>
