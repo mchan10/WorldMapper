@@ -36,7 +36,7 @@ const Homescreen = (props) => {
             regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
         }
     }
-    console.log(props.user);
+
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();

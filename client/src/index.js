@@ -14,7 +14,12 @@ const cache = new InMemoryCache({
 	typePolicies: {
 		Query: {
 			fields: {
-				getAllEntries: {
+				getAllRegions: {
+					merge(existing, incoming){
+						return incoming
+					}
+				},
+				getAllMaps: {
 					merge(existing, incoming){
 						return incoming
 					}
