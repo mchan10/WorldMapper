@@ -29,6 +29,7 @@ const typeDefs = gql `
 		deleteMap(_id: String!): Boolean
 		addSubregion(_id: String!, region: RegionInput): String
 		updateAccess(_id: String!): Boolean
+		orderSubregions(_id: String!, subregion: [String]): [String]
 	}
 	input RegionInput {
 		_id: String!

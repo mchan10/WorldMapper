@@ -15,13 +15,13 @@ export class SortRegions_Transaction extends jsTPS_Transaction{
         this.field = field;
     }
     async doTranscation(){
-        let sorted = regions[_id];
-        sorted.sort((x,y) => {regions[x][this.field].localeCompare(regions[y][this.field])});
-        const { data } = await updateFunction({variables: {_id: this._id, subregion: sorted}});
+        let sorted = this.regions[this._id];
+        sorted.sort((x,y) => {this.regions[x][this.field].localeCompare(this.regions[y][this.field])});
+        const { data } = await this.updateFunction({variables: {_id: this._id, subregion: sorted}});
         this.unsorted = data;
     }
     async undoTransaction(){
-        const { data } = await updateFunction({variables: {_id: this._id, subregion: this.unsorted}})
+        const { data } = await this.updateFunction({variables: {_id: this._id, subregion: this.unsorted}})
     }
 }
 

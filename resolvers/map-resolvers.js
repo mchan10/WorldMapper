@@ -124,6 +124,13 @@ module.exports = {
 			const update = await Map.updateOne({_id: _id}, {lastAccessed: today});
 			if (update){ return true}
 			return false;
+		},
+		orderSubregions: async (_, args) => {
+			const { _id, subregion } = args;
+			const foundRegion = await Region.findOne({_id: _id});
+			const oldSub = foundRegion.children;
+			const update = await Region.updateOne({_id: _id}, {children: subregion});
+			return oldSub;
 		}
 	}
 }
