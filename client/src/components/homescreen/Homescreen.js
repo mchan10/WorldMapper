@@ -96,7 +96,7 @@ const Homescreen = (props) => {
         newRegion.landmarks = [];
         newRegion.owner = "";
         const data = await AddSubregion({variables:{_id: parentId, region: newRegion}});
-        refetchData();
+        await refetchData();
     }
 
     const sortRegions = async (_id, field) => {
