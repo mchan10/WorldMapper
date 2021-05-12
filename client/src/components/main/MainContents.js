@@ -1,4 +1,4 @@
-import React            from 'react';
+import React, { useState }            from 'react';
 import { WLayout, WLHeader, WLMain, WLSide, WButton, WCard, WCContent, WCFooter } from 'wt-frontend';
 import MapEntry from './MapEntry.js'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -8,9 +8,9 @@ import SpreadsheetHeader from './SpreadsheetHeader.js';
 import ViewerHeader from './ViewerHeader.js';
 import ViewerRegion from './ViewerRegion.js';
 import ViewerLandmarks from './ViewerLandmarks.js';
-import { PromiseProvider } from 'mongoose';
 
 const MainContents = (props) => {
+    
     return (
         <>
         {props.auth ? 

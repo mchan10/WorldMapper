@@ -1,7 +1,28 @@
+import { supportsResultCaching } from "@apollo/client/cache/inmemory/entityStore";
+
 export class jsTPS_Transaction {
     constructor() {};
     doTransaction() {};
     undoTransaction () {};
+}
+
+export class SortRegions_Transaction extends jsTPS_Transaction{
+    constructor(_id, regions, field, updateFunction){
+        super();
+        this._id = _id;
+        this.regions = regions;
+        this.updateFunction = updateFunction;
+        this.field = field;
+    }
+    async doTranscation(){
+        let sorted = regions[_id];
+        sorted.sort((x,y) => {regions[x][this.field].localeCompare(regions[y][this.field])});
+        const { data } = await updateFunction({variables: {_id: this._id, subregion: sorted}});
+        this.unsorted = data;
+    }
+    async undoTransaction(){
+        const { data } = await updateFunction({variables: {_id: this._id, subregion: this.unsorted}})
+    }
 }
 
 export class jsTPS {

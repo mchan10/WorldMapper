@@ -84,6 +84,10 @@ const Homescreen = (props) => {
         refetchData();
     }
 
+    const sortRegions = async (_id, field) => {
+
+    }
+
     return(
         <>
         {regq.loading || mapq.loading ? null :
