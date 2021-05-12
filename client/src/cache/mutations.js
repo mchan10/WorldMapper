@@ -63,6 +63,6 @@ export const UPDATE_ACCESS = gql`
 
 export const ORDER_SUBREGION = gql`
 	mutation OrderSubregion($_id: String!, $subregion: [String]){
-		orderSubregion(_id: $_id, subregion: $subregion)
+		orderSubregions(_id: $_id, subregion: $subregion)
 	}
 `

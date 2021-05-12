@@ -14,14 +14,18 @@ export class SortRegions_Transaction extends jsTPS_Transaction{
         this.updateFunction = updateFunction;
         this.field = field;
     }
-    async doTranscation(){
-        let sorted = this.regions[this._id];
-        sorted.sort((x,y) => {this.regions[x][this.field].localeCompare(this.regions[y][this.field])});
+    async doTransaction(){
+        let old = this.regions[this._id].children;
+        let sorted = [...old];
+        sorted.sort((x,y) => this.regions[x][this.field].localeCompare(this.regions[y][this.field]));
+        if (old.toString() === sorted.toString()){
+            sorted.sort((x,y) => this.regions[y][this.field].localeCompare(this.regions[x][this.field]));
+        }
         const { data } = await this.updateFunction({variables: {_id: this._id, subregion: sorted}});
         this.unsorted = data;
     }
     async undoTransaction(){
-        const { data } = await this.updateFunction({variables: {_id: this._id, subregion: this.unsorted}})
+        const { data } = await this.updateFunction({variables: {_id: this._id, subregion: this.unsorted}});
     }
 }
 
@@ -92,7 +96,7 @@ export class jsTPS {
      */
      async doTransaction() {
 		let retVal;
-        if (this.hasTransactionToRedo()) {   
+        if (this.hasTransactionToRedo()) {  
             this.performingDo = true;
             let transaction = this.transactions[this.mostRecentTransaction+1];
 			retVal = await transaction.doTransaction();

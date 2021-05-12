@@ -1,7 +1,7 @@
 import React, { useState }            from 'react';
 import { WLayout, WLHeader, WLMain, WLSide, WButton, WCard, WCContent, WCFooter } from 'wt-frontend';
 import MapEntry from './MapEntry.js'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import SpreadsheetTable from './SpreadsheetTable.js'
 import SpreadsheetControls from './SpreadsheetControls.js';
 import SpreadsheetHeader from './SpreadsheetHeader.js';
@@ -10,7 +10,7 @@ import ViewerRegion from './ViewerRegion.js';
 import ViewerLandmarks from './ViewerLandmarks.js';
 
 const MainContents = (props) => {
-    
+
     return (
         <>
         {props.auth ? 
@@ -53,7 +53,7 @@ const MainContents = (props) => {
                             <div style={{backgroundColor:"#e3dede", width:"100%", height:"100%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
                                 <WLayout wLayout="header">
                                     <WLHeader style={{backgroundColor:"red"}}>
-                                        <SpreadsheetHeader></SpreadsheetHeader>
+                                        <SpreadsheetHeader sortRegions={props.sortRegions}></SpreadsheetHeader>
                                     </WLHeader>
                                     <WLMain style={{overflow:"auto"}}>
                                         <SpreadsheetTable moveTo={props.moveTo} regions={props.regions}>

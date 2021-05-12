@@ -12,6 +12,7 @@ import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
+import { SortRegions_Transaction } from '../../utils/jsTPS.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -29,6 +30,7 @@ const Homescreen = (props) => {
     const [DeleteMap] = useMutation(mutations.DELETE_MAP);
     const [AddSubregion] = useMutation(mutations.ADD_SUBREGION);
     const [UpdateAccess] = useMutation(mutations.UPDATE_ACCESS);
+    const [OrderSubregion] = useMutation(mutations.ORDER_SUBREGION);
 
     const mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -56,10 +58,23 @@ const Homescreen = (props) => {
             }
             regions = newRegionData;
         }
-        if(auth && (!newmap || !newreg)){
-            refetchData();
-        }
+        /*if(auth && (!newmap || !newreg)){
+            await refetchData();
+        }*/
     }
+
+    const tpsUndo = async () => {
+		const retVal = await props.tps.undoTransaction();
+		await refetchData();
+		return retVal;
+	}
+
+	const tpsRedo = async () => {
+		const retVal = await props.tps.doTransaction();
+		await refetchData();
+		return retVal;
+	}
+
     const addNewMap = async (name) => {
         const { data } = await AddNewMap({variables: {name: name}});
         await refetchData();
@@ -85,7 +100,9 @@ const Homescreen = (props) => {
     }
 
     const sortRegions = async (_id, field) => {
-
+        const transaction = new SortRegions_Transaction(_id, regions, field, OrderSubregion);
+        props.tps.addTransaction(transaction);
+        tpsRedo();
     }
 
     return(
@@ -117,7 +134,7 @@ const Homescreen = (props) => {
                 <MainContents 
                 auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} 
                 addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
-                updateAccess={UpdateAccess}>
+                updateAccess={UpdateAccess} sortRegions={sortRegions}> 
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper
