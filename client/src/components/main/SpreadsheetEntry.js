@@ -50,9 +50,9 @@ const SpreadsheetEntry = (props) => {
                 <WInput defaultValue={currentRegion.leader} name="leader" autoFocus onBlur={handleFieldChange}>
                 </WInput>
                 :
-                <WButton onClick={() => activateField(2)}>
+                <div onClick={() => activateField(2)}>
                     {currentRegion.leader}
-                </WButton>
+                </div>
                 }
             </WCol>
             <WCol size="1" style={{display:"grid", alignItems:"center"}}>
