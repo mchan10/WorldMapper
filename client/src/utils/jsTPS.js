@@ -29,6 +29,23 @@ export class SortRegions_Transaction extends jsTPS_Transaction{
     }
 }
 
+export class UpdateField_Transaction extends jsTPS_Transaction{
+    constructor(_id, field, newVal, oldVal, updateFunction){
+        super();
+        this._id = _id;
+        this.newVal = newVal;
+        this.updateFunction = updateFunction;
+        this.field = field;
+        this.oldVal = oldVal;
+    }
+    async doTransaction(){
+        const { data } = await this.updateFunction({variables: {_id: this._id, field: this.field, value: this.newVal}})
+    }
+    async undoTransaction(){
+        const { data } = await this.updateFunction({variables: {_id: this._id, field: this.field, value: this.oldVal}});
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

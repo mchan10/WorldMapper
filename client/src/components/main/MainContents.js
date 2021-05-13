@@ -56,7 +56,7 @@ const MainContents = (props) => {
                                         <SpreadsheetHeader sortRegions={props.sortRegions}></SpreadsheetHeader>
                                     </WLHeader>
                                     <WLMain style={{overflow:"auto"}}>
-                                        <SpreadsheetTable moveTo={props.moveTo} regions={props.regions}>
+                                        <SpreadsheetTable moveTo={props.moveTo} regions={props.regions} updateField={props.updateField}>
 
                                         </SpreadsheetTable>
                                     </WLMain>

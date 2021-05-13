@@ -66,3 +66,9 @@ export const ORDER_SUBREGION = gql`
 		orderSubregions(_id: $_id, subregion: $subregion)
 	}
 `
+
+export const UPDATE_FIELD = gql`
+	mutation UpdateField($_id: String!, $field: String!, $value: String!){
+		updateField(_id: $_id, field: $field, value: $value)
+	}
+`

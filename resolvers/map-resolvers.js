@@ -131,6 +131,14 @@ module.exports = {
 			const oldSub = foundRegion.children;
 			const update = await Region.updateOne({_id: _id}, {children: subregion});
 			return oldSub;
+		},
+		updateField: async (_, args) => {
+			const { _id, field, value} = args;
+			let pair = {};
+			pair[field] = value;
+			const update = await Region.updateOne({_id: _id}, pair);
+			if (update) {return true};
+			return false;
 		}
 	}
 }

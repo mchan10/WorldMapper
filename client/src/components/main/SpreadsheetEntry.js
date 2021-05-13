@@ -9,6 +9,7 @@ const SpreadsheetEntry = (props) => {
         const field = e.target.name;
         const value = e.target.value;
         console.log(field,value);
+        props.updateField(props.region, field, value);
         props.setInputRow(-1);
         props.setInputCol(-1);
     }
@@ -22,7 +23,8 @@ const SpreadsheetEntry = (props) => {
     const handleKeySwap = async (e) => {
         const field = e.target.name;
         const value = e.target.value;
-        console.log(field,value);
+        const region = e.target.id;
+        props.updateField(region, field, value);
     }
 
     const keyboardHandle = (event) => {
@@ -68,7 +70,7 @@ const SpreadsheetEntry = (props) => {
             </WCol>
             <WCol size="2">
                 {selected && props.inputCol === 0 ? 
-                <WInput defaultValue={currentRegion.name} name="name" autoFocus onBlur={handleFieldChange}>
+                <WInput defaultValue={currentRegion.name} name="name" autoFocus onBlur={handleFieldChange} id={props.region}>
                 </WInput>
                 :
                 <WButton onClick={props.moveTo} hoverAnimation="darken">
@@ -77,7 +79,7 @@ const SpreadsheetEntry = (props) => {
             </WCol>
             <WCol size="2" style={{display:"grid", alignItems:"center"}}>
                 {selected && props.inputCol === 1 ? 
-                <WInput defaultValue={currentRegion.capital} name="capital" autoFocus onBlur={handleFieldChange}>
+                <WInput defaultValue={currentRegion.capital} name="capital" autoFocus onBlur={handleFieldChange} id={props.region}>
                 </WInput>
                 :
                 <div onClick={() => activateField(1)}>
@@ -87,7 +89,7 @@ const SpreadsheetEntry = (props) => {
             </WCol>
             <WCol size="2" style={{display:"grid", alignItems:"center"}}>
                 {selected && props.inputCol === 2 ? 
-                <WInput defaultValue={currentRegion.leader} name="leader" autoFocus onBlur={handleFieldChange}>
+                <WInput defaultValue={currentRegion.leader} name="leader" autoFocus onBlur={handleFieldChange} id={props.region}>
                 </WInput>
                 :
                 <div onClick={() => activateField(2)}>
