@@ -36,6 +36,7 @@ const Homescreen = (props) => {
     const [DeleteRegion] = useMutation(mutations.DELETE_REGION);
     const [AddMultipleRegions] = useMutation(mutations.ADD_MULTIPLE_REGIONS);
     const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
+    const [RemoveLandmark] = useMutation(mutations.REMOVE_LANDMARK);
 
     let mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -127,11 +128,10 @@ const Homescreen = (props) => {
     }
 
     const addLandmark = async (_id, value) => {
-        const testfunc = () => {};
         if (regions[_id].landmarks.indexOf(value) !== -1){
             return;
         }
-        const transaction = new AddLandmark_Transaction(_id, value, AddLandmark, testfunc);
+        const transaction = new AddLandmark_Transaction(_id, value, AddLandmark, RemoveLandmark);
         await props.tps.addTransaction(transaction);
         tpsRedo();
     }

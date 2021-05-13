@@ -94,6 +94,9 @@ export class AddLandmark_Transaction extends jsTPS_Transaction{
     async doTransaction(){
         const { data } = await this.addFunction({variables: {_id: this._id, value: this.value, index: -1}});
     }
+    async undoTransaction(){
+        const { data } = await this.deleteFunction({variables: {_id: this._id, index: -1}});
+    }
 }
 
 export class jsTPS {

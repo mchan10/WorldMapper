@@ -99,3 +99,9 @@ export const ADD_LANDMARK = gql`
 		addLandmark(_id: $_id, value: $value, index: $index)
 	}
 `
+
+export const REMOVE_LANDMARK = gql`
+	mutation RemoveLandmark($_id: String!, $index: Int!){
+		removeLandmark(_id: $_id, index: $index)
+	}
+`
