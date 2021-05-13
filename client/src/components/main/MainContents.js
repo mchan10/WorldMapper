@@ -48,7 +48,7 @@ const MainContents = (props) => {
                     <WLayout wLayout="header">
                         <WLHeader>
                             <SpreadsheetControls regions={props.regions} addSubregion={props.addSubregion} 
-                            tpsRedo={props.tpsRedo} tpsUndo={props.tpsUndo}>
+                            tpsRedo={props.tpsRedo} tpsUndo={props.tpsUndo} canUndo={props.canUndo} canRedo={props.canRedo}>
                             </SpreadsheetControls>
                         </WLHeader>
                         <WLMain>
