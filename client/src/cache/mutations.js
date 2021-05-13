@@ -72,3 +72,17 @@ export const UPDATE_FIELD = gql`
 		updateField(_id: $_id, field: $field, value: $value)
 	}
 `
+
+export const DELETE_REGION = gql`
+	mutation DeleteRegion($_id: String!){
+		deleteRegion(_id: $_id){
+			_id
+            name
+            capital
+            leader
+            parent
+            children
+            landmarks
+		}
+	}
+`

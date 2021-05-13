@@ -99,9 +99,8 @@ module.exports = {
 			const { _id, region } = args;
 			const owner = new ObjectId(req.userId);
 			const parentId = _id;
-			const subregionId = new ObjectId();
 			if (region._id === ""){
-				region._id = subregionId;
+				region._id = new ObjectId();
 			}
 			region.owner = owner;
 			region.parent = parentId;
@@ -109,11 +108,11 @@ module.exports = {
 				...region
 			})
 			const foundParent = await Region.findOne({_id: parentId});
-			foundParent.children.push(subregionId);
+			foundParent.children.push(region._id);
 			const updateRegion = await Region.updateOne({_id: parentId}, {children: foundParent.children});
 			const updateSubregion = await schemaRegion.save();
 			if (updateSubregion){
-				return subregionId;
+				return region._id;
 			}
 			return "";
 		},
@@ -139,6 +138,29 @@ module.exports = {
 			const update = await Region.updateOne({_id: _id}, pair);
 			if (update) {return true};
 			return false;
+		},
+		deleteRegion: async (_, args) => {
+			const { _id } = args;
+			const foundRegion = await Region.findOne({_id: _id});
+			const deleted = await Region.deleteOne({_id: _id});
+			const parentId = foundRegion.parent;
+			const foundParent = await Region.findOne({_id: parentId});
+			const childrenIndex = foundParent.children.indexOf(_id);
+			let newChild = [...foundParent.children];
+			newChild.splice(childrenIndex, 1);
+			const update = await Region.updateOne({_id: parentId}, {children: newChild});
+			let accum = [];
+			accum.push(foundRegion);
+			let stack = [];
+			stack.push(...foundRegion.children);
+			while (stack.length > 0){
+				let regionId = stack.pop();
+				let region = await Region.findOne({_id: regionId});
+				accum.push(region);
+				stack.push(...(region.children));
+				let data = await Region.deleteOne({_id: regionId});
+			}
+			return accum;
 		}
 	}
 }

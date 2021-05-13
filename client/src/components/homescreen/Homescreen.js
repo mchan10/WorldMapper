@@ -12,7 +12,7 @@ import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
-import { SortRegions_Transaction, UpdateField_Transaction } from '../../utils/jsTPS.js';
+import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction } from '../../utils/jsTPS.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -32,12 +32,13 @@ const Homescreen = (props) => {
     const [UpdateAccess] = useMutation(mutations.UPDATE_ACCESS);
     const [OrderSubregion] = useMutation(mutations.ORDER_SUBREGION);
     const [UpdateField] = useMutation(mutations.UPDATE_FIELD);
+    const [DeleteRegion] = useMutation(mutations.DELETE_REGION);
 
-    const mapq = useQuery(GET_DB_MAPS);
+    let mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
 	if(mapq.error) { console.log(mapq.error, 'error'); }
 	if(mapq.data) { maps = mapq.data.getAllMaps; }
-    const regq = useQuery(GET_DB_REGIONS);
+    let regq = useQuery(GET_DB_REGIONS);
     if(regq.loading) { console.log(regq.loading, 'loading'); }
 	if(regq.error) { console.log(regq.error, 'error'); }
 	if(regq.data) {
@@ -51,9 +52,11 @@ const Homescreen = (props) => {
         const newreg = await regq.refetch();
         let newRegionData = []
         if (newmap && newmap.data){
+            mapq = newmap;
             maps = newmap.data.getAllMaps;
         }
         if (newreg && newreg.data){
+            regq = newreg;
             for (let i = 0; i < regq.data.getAllRegions.length; i++){
                 newRegionData[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
             }
@@ -96,8 +99,9 @@ const Homescreen = (props) => {
         newRegion.children = [];
         newRegion.landmarks = [];
         newRegion.owner = "";
-        const data = await AddSubregion({variables:{_id: parentId, region: newRegion}});
-        await refetchData();
+        const transaction = new AddRegion_Transaction(parentId, newRegion, AddSubregion, DeleteRegion)
+        await props.tps.addTransaction(transaction);
+        tpsRedo();
     }
 
     const sortRegions = async (_id, field) => {
