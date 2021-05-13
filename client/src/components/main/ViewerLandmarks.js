@@ -23,7 +23,6 @@ const ViewerLandmarks = (props) => {
         }
         stack.push(...nextRegion.children);
     }
-    console.log(accum);
 
     const updateInput = (e) => {
         changeInput(e.target.value);

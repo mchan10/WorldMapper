@@ -21,7 +21,6 @@ const ViewerHeader = (props) => {
     let editablePath = [...split];
     editablePath.pop();
     const newPath = editablePath.join("/");
-    console.log(newPath);
     return(
         <WLHeader>
             <WRow>

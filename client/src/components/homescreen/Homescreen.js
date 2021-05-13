@@ -50,23 +50,25 @@ const Homescreen = (props) => {
             regions[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
         }
     }
-
+    
     const refetchData = async () => {
         const newmap = await mapq.refetch();
         const newreg = await regq.refetch();
-        let newRegionData = []
+        /*
+        let newRegionData = [];
         if (newmap && newmap.data){
             mapq = newmap;
             maps = newmap.data.getAllMaps;
         }
         if (newreg && newreg.data){
+            console.log(newreg);
             regq = newreg;
             for (let i = 0; i < regq.data.getAllRegions.length; i++){
                 newRegionData[regq.data.getAllRegions[i]._id] = regq.data.getAllRegions[i];
             }
             regions = newRegionData;
         }
-        /*if(auth && (!newmap || !newreg)){
+        if(auth && (!newmap || !newreg)){
             await refetchData();
         }*/
     }

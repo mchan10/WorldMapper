@@ -8,7 +8,6 @@ const SpreadsheetEntry = (props) => {
     const handleFieldChange = async (e) => {
         const field = e.target.name;
         const value = e.target.value;
-        console.log(field, value, props.region);
         props.updateField(props.region, field, value);
         props.setInputRow(-1);
         props.setInputCol(-1);
