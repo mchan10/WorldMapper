@@ -83,6 +83,7 @@ export const DELETE_REGION = gql`
             parent
             children
             landmarks
+			owner
 		}
 	}
 `

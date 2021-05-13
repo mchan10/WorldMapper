@@ -54,10 +54,8 @@ export class AddRegion_Transaction extends jsTPS_Transaction{
         this.deleteFunction = deleteFunction;
     }
     async doTransaction(){
-        console.log(this.region);
         const { data } = await this.addFunction({variables: {_id: this._id, region: this.region}});
         this.region._id = data.addSubregion;
-        console.log(this.region._id)
     }
     async undoTransaction(){
         const { data } = await this.deleteFunction({variables: {_id: this.region._id}});

@@ -161,6 +161,20 @@ module.exports = {
 				let data = await Region.deleteOne({_id: regionId});
 			}
 			return accum;
+		},
+		addMultipleRegions: async (_, args) => {
+			const { _id, index, regions } = args;
+			const parentRegion = await Region.findOne({_id: _id});
+			let newChild = [...parentRegion.children];
+			newChild.splice(index, 0, regions[0]._id);
+			const update = await Region.updateOne({_id: _id}, {children: newChild});
+			for (let i = 0; i < regions.length; i++){
+				const updateRegion = new Region({
+					...regions[i]
+				});
+				await updateRegion.save();
+			}
+			return true;
 		}
 	}
 }

@@ -31,7 +31,8 @@ const typeDefs = gql `
 		updateAccess(_id: String!): Boolean
 		orderSubregions(_id: String!, subregion: [String]): [String]
 		updateField(_id: String!, field: String!, value: String!): Boolean
-		deleteRegion(_id:String!): [Region]
+		deleteRegion(_id: String!): [Region]
+		addMultipleRegions(_id: String!, index: Int!, regions: [RegionInput]): Boolean
 	}
 	input RegionInput {
 		_id: String!
