@@ -210,6 +210,22 @@ module.exports = {
 			let removed = landmarks.splice(index, 1, value);
 			const updated = await Region.updateOne({_id: _id}, {landmarks: landmarks});
 			return removed[0];
+		},
+		changeParent: async (_, args) => {
+			const { _id, parentId, index} = args;
+			const foundRegion = await Region.findOne({_id: _id});
+			const currentParentId = foundRegion.parent;
+			const foundCurrentParent = await Region.findOne({_id: currentParentId});
+			let currentChildren = [...foundCurrentParent.children];
+			const position = currentChildren.indexOf(_id);
+			currentChildren.splice(position, 1);
+			const updateCurrentParent = await Region.updateOne({_id: currentParentId}, {children: currentChildren});
+			const updateRegion = await Region.updateOne({_id: _id}, {parent: parentId});
+			const foundNewParent = await Region.findOne({_id: parentId});
+			let newChildren = [...foundNewParent.children];
+			newChildren.splice(index, 0, _id);
+			const updateNewParent = await Region.updateOne({_id: parentId}, {children: newChildren});
+			return position;
 		}
 	}
 }
