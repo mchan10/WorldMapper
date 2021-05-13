@@ -83,6 +83,19 @@ export class DeleteRegion_Transaction extends jsTPS_Transaction{
     }
 }
 
+export class AddLandmark_Transaction extends jsTPS_Transaction{
+    constructor(_id, value, addFunction, deleteFunction){
+        super();
+        this._id = _id;
+        this.value = value;
+        this.addFunction = addFunction;
+        this.deleteFunction = deleteFunction;
+    }
+    async doTransaction(){
+        const { data } = await this.addFunction({variables: {_id: this._id, value: this.value, index: -1}});
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

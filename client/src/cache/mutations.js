@@ -93,3 +93,9 @@ export const ADD_MULTIPLE_REGIONS = gql`
 		addMultipleRegions(_id: $_id, index: $index, regions: $regions)
 	}
 `
+
+export const ADD_LANDMARK = gql`
+	mutation AddLandmark($_id: String!, $value: String!, $index: Int!){
+		addLandmark(_id: $_id, value: $value, index: $index)
+	}
+`

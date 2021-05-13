@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { WLMain, WLayout, WLFooter, WLHeader, WRow, WCol, WInput } from 'wt-frontend';
 import ViewerEntry from './ViewerEntry.js';
 import { useLocation } from 'react-router-dom'; 
 
 const ViewerLandmarks = (props) => {
+    const [input, changeInput] = useState("");
     const location = useLocation();
     const path = location.pathname;
     const split = path.split("/")
@@ -13,7 +14,6 @@ const ViewerLandmarks = (props) => {
     let accum = [];
     stack.push(...region.children);
     while (stack.length > 0){
-        console.log(stack);
         const id = stack.pop();
         const nextRegion = props.regions[id];
         for (let lm in nextRegion.landmarks){
@@ -21,6 +21,15 @@ const ViewerLandmarks = (props) => {
         }
         stack.push(...nextRegion.children);
     }
+
+    const updateInput = (e) => {
+        changeInput(e.target.value);
+    }
+
+    const addInput = () => {
+        props.addLandmark(currentRegion, input);
+    }
+
     return(
         <WLMain style={{marginLeft:"45%", width:"50%"}}>
             <WLayout wLayout="header-footer">
@@ -38,10 +47,10 @@ const ViewerLandmarks = (props) => {
                 <WLFooter>
                     <WRow>
                         <WCol size="1">
-                            <i className="material-icons" style={{color:"green"}}>add</i>
+                            <i className="material-icons" style={{color:"green", cursor:"pointer"}} onClick={addInput}>add</i>
                         </WCol>
                         <WCol size="11">
-                            <WInput></WInput>
+                            <WInput onBlur={updateInput}></WInput>
                         </WCol>
                     </WRow>
                 </WLFooter>

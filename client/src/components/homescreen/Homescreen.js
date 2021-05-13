@@ -12,7 +12,8 @@ import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
-import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction } from '../../utils/jsTPS.js';
+import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction, AddLandmark_Transaction } from '../../utils/jsTPS.js';
+import { removeArgumentsFromDocument } from '@apollo/client/utilities';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -34,6 +35,7 @@ const Homescreen = (props) => {
     const [UpdateField] = useMutation(mutations.UPDATE_FIELD);
     const [DeleteRegion] = useMutation(mutations.DELETE_REGION);
     const [AddMultipleRegions] = useMutation(mutations.ADD_MULTIPLE_REGIONS);
+    const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
 
     let mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -124,6 +126,16 @@ const Homescreen = (props) => {
         tpsRedo();
     }
 
+    const addLandmark = async (_id, value) => {
+        const testfunc = () => {};
+        if (regions[_id].landmarks.indexOf(value) !== -1){
+            return;
+        }
+        const transaction = new AddLandmark_Transaction(_id, value, AddLandmark, testfunc);
+        await props.tps.addTransaction(transaction);
+        tpsRedo();
+    }
+
     return(
         <>
         {regq.loading || mapq.loading ? null :
@@ -154,7 +166,8 @@ const Homescreen = (props) => {
                 auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} 
                 addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
                 updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField} tpsRedo={tpsRedo} tpsUndo={tpsUndo} 
-                deleteRegion={deleteRegion} canUndo={props.tps.hasTransactionToUndo()} canRedo={props.tps.hasTransactionToRedo()}> 
+                deleteRegion={deleteRegion} canUndo={props.tps.hasTransactionToUndo()} canRedo={props.tps.hasTransactionToRedo()}
+                addLandmark={addLandmark}> 
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper
