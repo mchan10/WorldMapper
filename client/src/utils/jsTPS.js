@@ -116,6 +116,23 @@ export class RemoveLandmark_Transaction extends jsTPS_Transaction{
     }
 }
 
+export class EditLandmark_Transaction extends jsTPS_Transaction{
+    constructor(_id, newVal, index, oldVal, editFunction){
+        super();
+        this._id = _id;
+        this.newVal = newVal;
+        this.oldVal = oldVal;
+        this.index = index;
+        this.editFunction = editFunction;
+    }
+    async doTransaction(){
+        const { data } = await this.editFunction({variables: {_id: this._id, value: this.newVal, index: this.index}});
+    }
+    async undoTransaction(){
+        const { data } = await this.editFunction({variables: {_id: this._id, value: this.oldVal, index: this.index}})
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

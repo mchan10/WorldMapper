@@ -1,10 +1,17 @@
-import React from 'react';
-import { WRow, WCol } from 'wt-frontend';
+import React, { useState } from 'react';
+import { WRow, WCol, WInput } from 'wt-frontend';
 
 const ViewerEntry = (props) => {
 
+    const [editing, toggleEditing] = useState(false);
+
     const removeLandmark = () => {
         props.removeLandmark(props.region, props.index);
+    }
+
+    const editLandmark = async (e) => {
+        await props.editLandmark(props.region, e.target.value, props.index);
+        toggleEditing(false);
     }
 
     return(
@@ -15,10 +22,12 @@ const ViewerEntry = (props) => {
                 : null}
             </WCol>
             <WCol size="1">
-                <i className="material-icons" style={{color:"white", cursor:"pointer"}}>edit</i>
+                <i className="material-icons" style={{color:"white", cursor:"pointer"}} onClick={() => toggleEditing(true)}>edit</i>
             </WCol>
             <WCol size="10" style={{color:"white"}}>
-                {props.name}
+                {editing ?
+                <WInput defaultValue={props.name} onBlur={editLandmark} style={{color:"white"}} autoFocus></WInput>
+                : props.name}
             </WCol>
         </WRow>
     );

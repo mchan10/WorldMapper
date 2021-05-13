@@ -76,7 +76,8 @@ const MainContents = (props) => {
                         </ViewerHeader>
                         <ViewerRegion regions={props.regions} moveTo={props.moveTo}>
                         </ViewerRegion>
-                        <ViewerLandmarks regions={props.regions} addLandmark={props.addLandmark} removeLandmark={props.removeLandmark}>
+                        <ViewerLandmarks regions={props.regions} addLandmark={props.addLandmark} removeLandmark={props.removeLandmark} 
+                        editLandmark={props.editLandmark}>
                         </ViewerLandmarks>
                     </WLayout>
                 </div>    
