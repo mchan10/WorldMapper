@@ -23,11 +23,13 @@ const ViewerEntry = (props) => {
         <WRow style={{height:"5%"}}>
             <WCol size="1">
                 {props.delete ? 
-                    <i className="material-icons" style={{color:"red", cursor:"pointer"}} onClick={removeLandmark} >close</i>
+                <i className="material-icons" style={{color:"red", cursor:"pointer"}} onClick={removeLandmark} >close</i>
                 : null}
             </WCol>
             <WCol size="1">
+                {props.delete ?
                 <i className="material-icons" style={{color:"white", cursor:"pointer"}} onClick={() => toggleEditing(true)}>edit</i>
+                : null}
             </WCol>
             <WCol size="10" style={{color:"white"}}>
                 {editing ?

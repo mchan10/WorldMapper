@@ -19,10 +19,11 @@ const ViewerLandmarks = (props) => {
         const id = stack.pop();
         const nextRegion = props.regions[id];
         for (let lm in nextRegion.landmarks){
-            accum.push(lm + " - " + nextRegion.name);
+            accum.push(nextRegion.landmarks[lm] + " - " + nextRegion.name);
         }
         stack.push(...nextRegion.children);
     }
+    console.log(accum);
 
     const updateInput = (e) => {
         changeInput(e.target.value);
