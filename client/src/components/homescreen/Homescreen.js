@@ -12,7 +12,7 @@ import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
-import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction } from '../../utils/jsTPS.js';
+import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction } from '../../utils/jsTPS.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -33,6 +33,7 @@ const Homescreen = (props) => {
     const [OrderSubregion] = useMutation(mutations.ORDER_SUBREGION);
     const [UpdateField] = useMutation(mutations.UPDATE_FIELD);
     const [DeleteRegion] = useMutation(mutations.DELETE_REGION);
+    const [AddMultipleRegions] = useMutation(mutations.ADD_MULTIPLE_REGIONS);
 
     let mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -113,10 +114,14 @@ const Homescreen = (props) => {
     const updateField = async (_id, field, newVal) => {
         const oldVal = regions[_id][field];
         const transaction = new UpdateField_Transaction(_id, field, newVal, oldVal, UpdateField);
-        console.log(transaction);
         await props.tps.addTransaction(transaction);
         tpsRedo();
-        console.log(props.tps.transactions);
+    }
+
+    const deleteRegion = async (_id, index) => {
+        const transaction = new DeleteRegion_Transaction(_id, index, regions[_id].parent, DeleteRegion, AddMultipleRegions);
+        await props.tps.addTransaction(transaction);
+        tpsRedo();
     }
 
     return(
@@ -148,7 +153,8 @@ const Homescreen = (props) => {
                 <MainContents 
                 auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} 
                 addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
-                updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField} tpsRedo={tpsRedo} tpsUndo={tpsUndo}> 
+                updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField} tpsRedo={tpsRedo} tpsUndo={tpsUndo} 
+                deleteRegion={deleteRegion}> 
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper

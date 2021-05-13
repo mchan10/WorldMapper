@@ -62,6 +62,27 @@ export class AddRegion_Transaction extends jsTPS_Transaction{
     }
 }
 
+export class DeleteRegion_Transaction extends jsTPS_Transaction{
+    constructor(_id, index, parentId, deleteFunction, addFunction){
+        super();
+        this._id = _id;
+        this.index = index;
+        this.parentId = parentId;
+        this.deleteFunction = deleteFunction;
+        this.addFunction = addFunction;
+    }
+    async doTransaction(){
+        const { data } = await this.deleteFunction({ variables: {_id: this._id}});
+        this.regions = data.deleteRegion;
+        for (let i = 0; i < this.regions.length; i++){
+            delete this.regions[i].__typename;
+        }
+    }
+    async undoTransaction(){
+        const { data } = await this.addFunction({variables: {_id: this.parentId, index: this.index, regions: this.regions}});
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

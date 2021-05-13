@@ -87,3 +87,9 @@ export const DELETE_REGION = gql`
 		}
 	}
 `
+
+export const ADD_MULTIPLE_REGIONS = gql`
+	mutation AddMultipleRegions($_id: String!, $index: Int!, $regions: [RegionInput]){
+		addMultipleRegions(_id: $_id, index: $index, regions: $regions)
+	}
+`

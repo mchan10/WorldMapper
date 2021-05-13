@@ -64,7 +64,7 @@ const SpreadsheetEntry = (props) => {
     return(
         <WRow>
             <WCol size="1">
-                <WButton>
+                <WButton onClick={() => props.deleteRegion(props.region, props.index)}>
                     <i className="material-icons">clear</i>
                 </WButton>
             </WCol>

@@ -16,7 +16,7 @@ const SpreadsheetTable = (props) => {
                 <SpreadsheetEntry region={region} key={region} regions={props.regions} moveTo={() => props.moveTo(path + "/" + region)} 
                 moveViewer={() => props.moveTo((path + "/" + region).replace("spreadsheet","viewer"))} inputRow={inputRow} inputCol={inputCol}
                 index={index} setInputRow={setInputRow} setInputCol={setInputCol} length={props.regions[currentRegion].children.length}
-                updateField={props.updateField}>
+                updateField={props.updateField} deleteRegion={props.deleteRegion}>
                 </SpreadsheetEntry>
             ))}
         </>
