@@ -175,6 +175,19 @@ module.exports = {
 				await updateRegion.save();
 			}
 			return true;
+		},
+		addLandmark: async (_, args) => {
+			const { _id, value, index } = args;
+			const foundRegion = await Region.findOne({_id: _id});
+			let landmarks = [...foundRegion.landmarks]
+			if (index === -1){
+				landmarks.push(value);
+			}
+			else{
+				landmarks.splice(index, 0, value);
+			}
+			const update = await Region.updateOne({_id: _id}, {landmarks: landmarks});
+			return true;
 		}
 	}
 }

@@ -33,6 +33,7 @@ const typeDefs = gql `
 		updateField(_id: String!, field: String!, value: String!): Boolean
 		deleteRegion(_id: String!): [Region]
 		addMultipleRegions(_id: String!, index: Int!, regions: [RegionInput]): Boolean
+		addLandmark(_id: String!, value: String!, index: Int!): Boolean
 	}
 	input RegionInput {
 		_id: String!

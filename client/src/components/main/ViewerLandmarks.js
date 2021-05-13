@@ -22,7 +22,7 @@ const ViewerLandmarks = (props) => {
         stack.push(...nextRegion.children);
     }
     return(
-        <WLMain style={{marginLeft:"5%"}}>
+        <WLMain style={{marginLeft:"45%", width:"50%"}}>
             <WLayout wLayout="header-footer">
                 <WLHeader>
                     <div style={{textAlign:"center",color:"white"}}>Region Landmarks:</div>
