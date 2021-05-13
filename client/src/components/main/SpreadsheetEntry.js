@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { WRow, WCol, WButton, WInput } from 'wt-frontend';
 
 const SpreadsheetEntry = (props) => {
@@ -8,7 +8,7 @@ const SpreadsheetEntry = (props) => {
     const handleFieldChange = async (e) => {
         const field = e.target.name;
         const value = e.target.value;
-        console.log(field,value);
+        console.log(field, value, props.region);
         props.updateField(props.region, field, value);
         props.setInputRow(-1);
         props.setInputCol(-1);
@@ -28,25 +28,25 @@ const SpreadsheetEntry = (props) => {
     }
 
     const keyboardHandle = (event) => {
-        if(event.key == "ArrowUp"){
+        if(event.key === "ArrowUp"){
             if (props.inputRow >= 1){
                 handleKeySwap(event);
                 props.setInputRow(props.inputRow - 1);
             }
         }
-        if (event.key == "ArrowDown"){
+        if (event.key === "ArrowDown"){
             if (props.inputRow !== -1 && props.inputRow < props.length - 1){
                 handleKeySwap(event);
                 props.setInputRow(props.inputRow + 1);
             }
         }
-        if (event.key == "ArrowLeft"){
+        if (event.key === "ArrowLeft"){
             if (props.inputCol >= 1){
                 handleKeySwap(event);
                 props.setInputCol(props.inputCol - 1);
             }
         }
-        if (event.key == "ArrowRight"){
+        if (event.key === "ArrowRight"){
             if (props.inputCol !== -1 && props.inputCol < 2){
                 handleKeySwap(event);
                 props.setInputCol(props.inputCol + 1);

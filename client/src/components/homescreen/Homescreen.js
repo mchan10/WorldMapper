@@ -102,15 +102,17 @@ const Homescreen = (props) => {
 
     const sortRegions = async (_id, field) => {
         const transaction = new SortRegions_Transaction(_id, regions, field, OrderSubregion);
-        props.tps.addTransaction(transaction);
+        await props.tps.addTransaction(transaction);
         tpsRedo();
     }
 
     const updateField = async (_id, field, newVal) => {
         const oldVal = regions[_id][field];
         const transaction = new UpdateField_Transaction(_id, field, newVal, oldVal, UpdateField);
-        props.tps.addTransaction(transaction);
+        console.log(transaction);
+        await props.tps.addTransaction(transaction);
         tpsRedo();
+        console.log(props.tps.transactions);
     }
 
     return(
@@ -142,7 +144,7 @@ const Homescreen = (props) => {
                 <MainContents 
                 auth={auth} maps={maps} moveTo={moveTo} changeMapName={ChangeMapName} refetch={refetchData} deleteMap={DeleteMap}regions={regions} 
                 addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
-                updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField}> 
+                updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField} tpsRedo={tpsRedo} tpsUndo={tpsUndo}> 
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper

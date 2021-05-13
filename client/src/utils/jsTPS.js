@@ -1,5 +1,3 @@
-import { supportsResultCaching } from "@apollo/client/cache/inmemory/entityStore";
-
 export class jsTPS_Transaction {
     constructor() {};
     doTransaction() {};
@@ -18,11 +16,12 @@ export class SortRegions_Transaction extends jsTPS_Transaction{
         let old = this.regions[this._id].children;
         let sorted = [...old];
         sorted.sort((x,y) => this.regions[x][this.field].localeCompare(this.regions[y][this.field]));
-        if (old.toString() === sorted.toString()){
+        console.log(old.toString(), sorted.toString())
+        if (old.toString().valueOf() === sorted.toString().valueOf()){
             sorted.sort((x,y) => this.regions[y][this.field].localeCompare(this.regions[x][this.field]));
         }
         const { data } = await this.updateFunction({variables: {_id: this._id, subregion: sorted}});
-        this.unsorted = data;
+        this.unsorted = data.orderSubregions;
     }
     async undoTransaction(){
         const { data } = await this.updateFunction({variables: {_id: this._id, subregion: this.unsorted}});

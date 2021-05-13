@@ -15,10 +15,10 @@ const SpreadsheetControls = (props) => {
                 </i>
             </WCol>
             <WCol size="1">
-                <i className="material-icons" style={{color:"white", cursor:"pointer"}}>undo</i>
+                <i className="material-icons" style={{color:"white", cursor:"pointer"}} onClick={() => props.tpsUndo()}>undo</i>
             </WCol>
             <WCol size="1">
-                <i className="material-icons" style={{color:"white", cursor:"pointer"}}>redo</i>
+                <i className="material-icons" style={{color:"white", cursor:"pointer"}} onClick={() => props.tpsRedo()}>redo</i>
             </WCol>
             <WCol size="6">
                 <div style={{color:"white", textAlign:"center"}}>{"Region Name: " + props.regions[currentRegion].name}</div>
