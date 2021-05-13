@@ -128,8 +128,18 @@ const Homescreen = (props) => {
     }
 
     const addLandmark = async (_id, value) => {
-        if (regions[_id].landmarks.indexOf(value) !== -1){
-            return;
+        let cursor = regions[_id];
+        while(cursor.parent.valueOf() !== "".valueOf()){
+            cursor = regions[cursor.parent];
+        }
+        let stack = [];
+        stack.push(cursor._id);
+        while (stack.length > 0){
+            let region = regions[stack.pop()];
+            if (region.landmarks.indexOf(value) !== -1){
+                return;
+            }
+            stack.push(...region.children);
         }
         const transaction = new AddLandmark_Transaction(_id, value, AddLandmark, RemoveLandmark);
         await props.tps.addTransaction(transaction);
