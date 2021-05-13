@@ -137,13 +137,14 @@ const Homescreen = (props) => {
         while (stack.length > 0){
             let region = regions[stack.pop()];
             if (region.landmarks.indexOf(value) !== -1){
-                return;
+                return false;
             }
             stack.push(...region.children);
         }
         const transaction = new AddLandmark_Transaction(_id, value, AddLandmark, RemoveLandmark);
         await props.tps.addTransaction(transaction);
         tpsRedo();
+        return true;
     }
 
     return(

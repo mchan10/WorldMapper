@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const ViewerLandmarks = (props) => {
     const [input, changeInput] = useState("");
+    const [errorMessage, toggleError] = useState(false);
     const location = useLocation();
     const path = location.pathname;
     const split = path.split("/")
@@ -26,8 +27,13 @@ const ViewerLandmarks = (props) => {
         changeInput(e.target.value);
     }
 
-    const addInput = () => {
-        props.addLandmark(currentRegion, input);
+    const addInput = async () => {
+        if (await props.addLandmark(currentRegion, input)){
+            toggleError(false);
+        }
+        else{
+            toggleError(true);
+        }
     }
 
     return(
@@ -53,6 +59,12 @@ const ViewerLandmarks = (props) => {
                             <WInput onBlur={updateInput}></WInput>
                         </WCol>
                     </WRow>
+                    {errorMessage ?
+                    <WRow>
+                        <WCol size="12">
+                            Landmark already in map.
+                        </WCol>
+                    </WRow>:null}
                 </WLFooter>
             </WLayout>
         </WLMain>
