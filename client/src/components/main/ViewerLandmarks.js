@@ -44,10 +44,10 @@ const ViewerLandmarks = (props) => {
                 </WLHeader>
                 <WLMain style={{overflow:"auto", backgroundColor:"black"}}>
                     {region.landmarks.map((landmark,index) => (
-                        <ViewerEntry name={landmark} key={index} delete={true}></ViewerEntry>
+                        <ViewerEntry name={landmark} key={index} delete={true} region={currentRegion} index={index} removeLandmark={props.removeLandmark}></ViewerEntry>
                     ))}
                     {accum.map((landmark, index) => (
-                        <ViewerEntry name={landmark} key={index} delete={false}></ViewerEntry>
+                        <ViewerEntry name={landmark} key={index} delete={false} ></ViewerEntry>
                     ))}
                 </WLMain>
                 <WLFooter>

@@ -99,6 +99,23 @@ export class AddLandmark_Transaction extends jsTPS_Transaction{
     }
 }
 
+export class RemoveLandmark_Transaction extends jsTPS_Transaction{
+    constructor(_id, oldVal, index, deleteFunction, addFunction){
+        super();
+        this._id = _id;
+        this.oldVal = oldVal;
+        this.index = index;
+        this.deleteFunction = deleteFunction;
+        this.addFunction = addFunction;
+    }
+    async doTransaction(){
+        const { data } = await this.deleteFunction({variables: {_id: this._id, index: this.index}});
+    }
+    async undoTransaction(){
+        const { data } = await this.addFunction({variables: {_id: this._id, value: this.oldVal, index: this.index}});
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

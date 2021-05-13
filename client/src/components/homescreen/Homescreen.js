@@ -12,7 +12,7 @@ import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
-import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction, AddLandmark_Transaction } from '../../utils/jsTPS.js';
+import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction, AddLandmark_Transaction, RemoveLandmark_Transaction } from '../../utils/jsTPS.js';
 import { removeArgumentsFromDocument } from '@apollo/client/utilities';
 
 const Homescreen = (props) => {
@@ -147,6 +147,13 @@ const Homescreen = (props) => {
         return true;
     }
 
+    const removeLandmark = async (_id, index) => {
+        const oldVal = regions[_id].landmarks[index];
+        const transaction = new RemoveLandmark_Transaction(_id, oldVal, index, RemoveLandmark, AddLandmark);
+        await props.tps.addTransaction(transaction);
+        tpsRedo();
+    }
+
     return(
         <>
         {regq.loading || mapq.loading ? null :
@@ -178,7 +185,7 @@ const Homescreen = (props) => {
                 addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
                 updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField} tpsRedo={tpsRedo} tpsUndo={tpsUndo} 
                 deleteRegion={deleteRegion} canUndo={props.tps.hasTransactionToUndo()} canRedo={props.tps.hasTransactionToRedo()}
-                addLandmark={addLandmark}> 
+                addLandmark={addLandmark} removeLandmark={removeLandmark}> 
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper
