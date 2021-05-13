@@ -188,6 +188,20 @@ module.exports = {
 			}
 			const update = await Region.updateOne({_id: _id}, {landmarks: landmarks});
 			return true;
+		},
+		removeLandmark: async (_, args) => {
+			const { _id, index } = args;
+			const foundRegion = await Region.findOne({_id: _id});
+			let landmarks = [...foundRegion.landmarks];
+			let removed = "";
+			if (index === -1){
+				removed = landmarks.pop();
+			}
+			else{
+				removed = landmarks.splice(index, 1)[0];
+			}
+			const updated = await Region.updateOne({_id: _id}, {landmarks: landmarks});
+			return removed;
 		}
 	}
 }
