@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 const ViewerLandmarks = (props) => {
     const [input, changeInput] = useState("");
     const [errorMessage, toggleError] = useState(false);
+    const [errorEdit, toggleErrorEdit] = useState(false);
     const location = useLocation();
     const path = location.pathname;
     const split = path.split("/")
@@ -41,11 +42,12 @@ const ViewerLandmarks = (props) => {
             <WLayout wLayout="header-footer">
                 <WLHeader>
                     <div style={{textAlign:"center",color:"white"}}>Region Landmarks:</div>
+                    {errorEdit ? <div style={{textAlign:"center",color:"white"}}>Landmark already within the map</div>: null}
                 </WLHeader>
                 <WLMain style={{overflow:"auto", backgroundColor:"black"}}>
                     {region.landmarks.map((landmark,index) => (
                         <ViewerEntry name={landmark} key={index} delete={true} region={currentRegion} index={index} 
-                        removeLandmark={props.removeLandmark} editLandmark={props.editLandmark}></ViewerEntry>
+                        removeLandmark={props.removeLandmark} editLandmark={props.editLandmark} toggleErrorEdit={toggleErrorEdit}></ViewerEntry>
                     ))}
                     {accum.map((landmark, index) => (
                         <ViewerEntry name={landmark} key={index} delete={false} ></ViewerEntry>

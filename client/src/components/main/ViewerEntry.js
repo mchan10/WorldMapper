@@ -10,7 +10,12 @@ const ViewerEntry = (props) => {
     }
 
     const editLandmark = async (e) => {
-        await props.editLandmark(props.region, e.target.value, props.index);
+        if (await props.editLandmark(props.region, e.target.value, props.index)){
+            props.toggleErrorEdit(false);
+        }
+        else{
+            props.toggleErrorEdit(true);
+        }
         toggleEditing(false);
     }
 
