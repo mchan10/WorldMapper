@@ -72,7 +72,8 @@ const MainContents = (props) => {
             <Route path='/viewer/' render={() => 
                 <div style={{width:"80%", height:"85%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
                     <WLayout wLayout="header-lside">
-                        <ViewerHeader tpsRedo={props.tpsRedo} tpsUndo={props.tpsUndo} canUndo={props.canUndo} canRedo={props.canRedo}>
+                        <ViewerHeader tpsRedo={props.tpsRedo} tpsUndo={props.tpsUndo} canUndo={props.canUndo} canRedo={props.canRedo} 
+                        moveTo={props.moveTo} regions={props.regions}>
                         </ViewerHeader>
                         <ViewerRegion regions={props.regions} moveTo={props.moveTo}>
                         </ViewerRegion>
