@@ -35,6 +35,7 @@ const typeDefs = gql `
 		addMultipleRegions(_id: String!, index: Int!, regions: [RegionInput]): Boolean
 		addLandmark(_id: String!, value: String!, index: Int!): Boolean
 		removeLandmark(_id: String!, index: Int!): String
+		editLandmark(_id: String!, value: String!, index: Int!): String
 	}
 	input RegionInput {
 		_id: String!

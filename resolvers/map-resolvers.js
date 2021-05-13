@@ -202,6 +202,14 @@ module.exports = {
 			}
 			const updated = await Region.updateOne({_id: _id}, {landmarks: landmarks});
 			return removed;
+		},
+		editLandmark: async (_, args) => {
+			const { _id, value, index} = args;
+			const foundRegion = await Region.findOne({_id: _id});
+			let landmarks = [...foundRegion.landmarks];
+			let removed = landmarks.splice(index, 1, value);
+			const updated = await Region.updateOne({_id: _id}, {landmarks: landmarks});
+			return removed[0];
 		}
 	}
 }
