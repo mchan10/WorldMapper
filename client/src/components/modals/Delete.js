@@ -2,13 +2,22 @@ import React from 'react';
 import { WModal, WMHeader, WMMain, WMFooter, WButton } from 'wt-frontend';
 
 const Delete = (props) => {
+    const disableFunc = () => {};
+
     const handleDelete = () => {
         props.deleteFunc();
         props.toggleDelete(false);
+        props.changeDeleteFunc(disableFunc);
     }
+
+    const closeModal = () => {
+        props.toggleDelete(false);
+        props.changeDeleteFunc(disableFunc);
+    }
+
     return(
     <WModal visible>
-        <WMHeader onClose={() => props.toggleDelete(false)} style={{backgroundColor:"red", color:"white", textAlign:"center"}}>
+        <WMHeader onClose={closeModal} style={{backgroundColor:"red", color:"white", textAlign:"center"}}>
             Delete
         </WMHeader>
         <WMMain style={{backgroundColor:"black", color:"white"}}>

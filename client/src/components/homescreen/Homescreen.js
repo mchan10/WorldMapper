@@ -122,6 +122,9 @@ const Homescreen = (props) => {
 
     const updateField = async (_id, field, newVal) => {
         const oldVal = regions[_id][field];
+        if (newVal.valueOf() == oldVal.valueOf()){
+            return;
+        }
         const transaction = new UpdateField_Transaction(_id, field, newVal, oldVal, UpdateField);
         await props.tps.addTransaction(transaction);
         tpsRedo();
@@ -199,6 +202,7 @@ const Homescreen = (props) => {
         if (parentId.valueOf() == regions[_id].parent.valueOf() || parentId.length === 0 || parentId.valueOf() == _id.valueOf()){
             return false;
         }
+        stack = [];
         stack.push(...regions[_id].children)
         while (stack.length > 0){
             let regionId = stack.pop();
@@ -216,8 +220,6 @@ const Homescreen = (props) => {
             if (regions[regionId].parent.length > 0){
                 stack.push(regions[regionId].parent);
             }
-            console.log(regionId);
-            console.log(regions[regionId]);
         }
         path.unshift("", "viewer")
         path = path.join("/");
@@ -267,7 +269,7 @@ const Homescreen = (props) => {
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin} refetch={refetchData}> </Login> : null}
             {showCreate ? <CreateAccount fetchUser={props.fetchUser} toggleCreate={toggleShowCreate}></CreateAccount>: null}
             {showUpdate ? <UpdateAccount fetchUser={props.fetchUser} toggleUpdate={toggleShowUpdate} user={props.user}></UpdateAccount>: null}
-            {showDelete ? <Delete toggleDelete={toggleShowDelete} deleteFunc={deleteFunc}></Delete>: null}
+            {showDelete ? <Delete toggleDelete={toggleShowDelete} deleteFunc={deleteFunc} changeDeleteFunc={changeDeleteFunc}></Delete>: null}
             {showCreateMap ? <CreateMap createMap={addNewMap} toggleCreateMap={toggleShowCreateMap}></CreateMap>: null}
         </WLayout>
         }

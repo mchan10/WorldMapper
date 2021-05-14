@@ -59,20 +59,27 @@ const SpreadsheetEntry = (props) => {
 			document.removeEventListener("keydown", keyboardHandle, false);
 		}
 	}, [props.inputRow, props.inputCol]);
+    
+    const deleteFunction = () => {
+        props.deleteRegion(props.region, props.index);
+    }
+
+    const handleDelete = () => {
+        props.changeDeleteFunc(() => deleteFunction);
+        props.toggleDelete(true);
+    }
 
     return(
         <WRow>
             <WCol size="1">
-                <WButton onClick={() => props.deleteRegion(props.region, props.index)}>
-                    <i className="material-icons">clear</i>
-                </WButton>
+                <i className="material-icons" onClick={handleDelete} style={{color:"red", cursor:"pointer"}}>clear</i>
             </WCol>
             <WCol size="2">
                 {selected && props.inputCol === 0 ? 
                 <WInput defaultValue={currentRegion.name} name="name" autoFocus onBlur={handleFieldChange} id={props.region}>
                 </WInput>
                 :
-                <WButton onClick={props.moveTo} hoverAnimation="darken">
+                <WButton onClick={props.moveTo} hoverAnimation="darken" style={{width:"95%"}}>
                     {currentRegion.name}
                 </WButton>}
             </WCol>

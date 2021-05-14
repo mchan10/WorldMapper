@@ -59,7 +59,7 @@ const MainContents = (props) => {
                                     </WLHeader>
                                     <WLMain style={{overflow:"auto"}}>
                                         <SpreadsheetTable moveTo={props.moveTo} regions={props.regions} updateField={props.updateField} 
-                                        deleteRegion={props.deleteRegion}>
+                                        deleteRegion={props.deleteRegion} changeDeleteFunc={props.changeDeleteFunc} toggleDelete={props.toggleDelete}>
                                         </SpreadsheetTable>
                                     </WLMain>
                                 </WLayout>

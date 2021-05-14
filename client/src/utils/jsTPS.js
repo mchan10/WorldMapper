@@ -16,7 +16,6 @@ export class SortRegions_Transaction extends jsTPS_Transaction{
         let old = this.regions[this._id].children;
         let sorted = [...old];
         sorted.sort((x,y) => this.regions[x][this.field].localeCompare(this.regions[y][this.field]));
-        console.log(old.toString(), sorted.toString())
         if (old.toString().valueOf() === sorted.toString().valueOf()){
             sorted.sort((x,y) => this.regions[y][this.field].localeCompare(this.regions[x][this.field]));
         }
