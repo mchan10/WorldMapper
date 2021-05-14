@@ -92,8 +92,11 @@ const Homescreen = (props) => {
         moveTo("/spreadsheet/" + data.addNewMap);
     }
 
-    const moveTo = (path) => {
+    const moveTo = (path, reset=true) => {
         props.history.push(path);
+        if (reset){
+            props.tps.clearAllTransactions();
+        }
     }
 
     const addSubregion = async (parentId) => {
@@ -196,7 +199,29 @@ const Homescreen = (props) => {
         if (parentId.valueOf() == regions[_id].parent.valueOf() || parentId.length === 0 || parentId.valueOf() == _id.valueOf()){
             return false;
         }
-        const transaction = new ChangeParent_Transaction(_id, parentId, regions[_id].parent, ChangeParent);
+        stack.push(...regions[_id].children)
+        while (stack.length > 0){
+            let regionId = stack.pop();
+            if (regionId.valueOf() == parentId.valueOf()){
+                return false;
+            }
+            stack.push(...regions[regionId].children);
+        }
+        let path = [];
+        path.unshift(_id);
+        stack.push(parentId);
+        while (stack.length > 0){
+            let regionId = stack.pop();
+            path.unshift(regionId);
+            if (regions[regionId].parent.length > 0){
+                stack.push(regions[regionId].parent);
+            }
+            console.log(regionId);
+            console.log(regions[regionId]);
+        }
+        path.unshift("", "viewer")
+        path = path.join("/");
+        const transaction = new ChangeParent_Transaction(_id, parentId, regions[_id].parent, path, props.history.location.pathname, ChangeParent, moveTo);
         await props.tps.addTransaction(transaction);
         tpsRedo();
         return true;
