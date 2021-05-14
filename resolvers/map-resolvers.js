@@ -223,7 +223,12 @@ module.exports = {
 			const updateRegion = await Region.updateOne({_id: _id}, {parent: parentId});
 			const foundNewParent = await Region.findOne({_id: parentId});
 			let newChildren = [...foundNewParent.children];
-			newChildren.splice(index, 0, _id);
+			if (index !== -1){
+				newChildren.splice(index, 0, _id);
+			}
+			else{
+				newChildren.push(_id);
+			}
 			const updateNewParent = await Region.updateOne({_id: parentId}, {children: newChildren});
 			return position;
 		}

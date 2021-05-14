@@ -133,6 +133,23 @@ export class EditLandmark_Transaction extends jsTPS_Transaction{
     }
 }
 
+export class ChangeParent_Transaction extends jsTPS_Transaction{
+    constructor(_id, parentId, oldParent, changeFunction){
+        super();
+        this._id = _id;
+        this.parentId = parentId;
+        this.oldParent = oldParent;
+        this.changeFunction = changeFunction;
+    }
+    async doTransaction(){
+        const { data } = await this.changeFunction({variables: {_id: this._id, parentId: this.parentId, index: -1}});
+        this.index = data.changeParent;
+    }
+    async undoTransaction(){
+        const { data } = await this.changeFunction({variables: {_id: this._id, parentId: this.oldParent, index: this.index}});
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

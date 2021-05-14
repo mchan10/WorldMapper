@@ -1,8 +1,9 @@
-import React from 'react';
-import { WCard, WLSide, WCContent, WCMedia } from 'wt-frontend';
+import React, { useState } from 'react';
+import { WCard, WLSide, WCContent, WCMedia, WInput } from 'wt-frontend';
 import { useLocation } from 'react-router-dom'; 
 
 const ViewerRegion = (props) => {
+    const [editing, toggleEdit] = useState(false);
     const location = useLocation();
     const path = location.pathname;
     const split = path.split("/")
@@ -13,6 +14,12 @@ const ViewerRegion = (props) => {
     parentPath.pop();
     parentPath = (parentPath.join("/"))
     parentPath = parentPath.replace("viewer","spreadsheet");
+
+    const handleChangeParent = async (e) => {
+        await props.changeParent(currentRegion, e.target.value);
+        toggleEdit(false);
+    }
+
     return(
         <WLSide>
             <WCard wLayout="media-content" style={{height:"100%",width:"100%"}}>
@@ -22,9 +29,12 @@ const ViewerRegion = (props) => {
                     <div style={{color:"white",fontWeight:"bold"}}>{"Region Name: " + region.name}</div>
                     <div>&nbsp;</div>
                     <div style={{color:"white",fontWeight:"bold"}}>{"Parent Region: "} 
-                        <span onClick={() => props.moveTo(parentPath)} style={{color:"blue",cursor:"pointer"}}>
+                        {editing ? 
+                        <WInput autoFocus onBlur={handleChangeParent}></WInput>
+                        :<span onClick={() => props.moveTo(parentPath)} style={{color:"blue",cursor:"pointer"}}>
                             {parentRegion.name}
-                        </span>
+                        </span>}
+                        <i className="material-icons" style={{color:"white", cursor:"pointer"}} onClick={() => toggleEdit(true)}>edit</i>
                     </div>
                     <div>&nbsp;</div>
                     <div style={{color:"white",fontWeight:"bold"}}>{"Region Capital: " + region.capital}</div>

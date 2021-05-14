@@ -75,7 +75,7 @@ const MainContents = (props) => {
                         <ViewerHeader tpsRedo={props.tpsRedo} tpsUndo={props.tpsUndo} canUndo={props.canUndo} canRedo={props.canRedo} 
                         moveTo={props.moveTo} regions={props.regions}>
                         </ViewerHeader>
-                        <ViewerRegion regions={props.regions} moveTo={props.moveTo}>
+                        <ViewerRegion regions={props.regions} moveTo={props.moveTo} changeParent={props.changeParent}>
                         </ViewerRegion>
                         <ViewerLandmarks regions={props.regions} addLandmark={props.addLandmark} removeLandmark={props.removeLandmark} 
                         editLandmark={props.editLandmark}>

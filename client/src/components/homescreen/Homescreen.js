@@ -12,7 +12,7 @@ import NavbarNavigation from '../navbar/NavbarNavigation.js';
 import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
-import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction, AddLandmark_Transaction, RemoveLandmark_Transaction, EditLandmark_Transaction } from '../../utils/jsTPS.js';
+import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction, AddLandmark_Transaction, RemoveLandmark_Transaction, EditLandmark_Transaction, ChangeParent_Transaction } from '../../utils/jsTPS.js';
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -37,6 +37,7 @@ const Homescreen = (props) => {
     const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
     const [RemoveLandmark] = useMutation(mutations.REMOVE_LANDMARK);
     const [EditLandmark] = useMutation(mutations.EDIT_LANDMARK);
+    const [ChangeParent] = useMutation(mutations.CHANGE_PARENT);
 
     let mapq = useQuery(GET_DB_MAPS);
     if(mapq.loading) { console.log(mapq.loading, 'loading'); }
@@ -175,6 +176,31 @@ const Homescreen = (props) => {
         tpsRedo();
         return true;
     }
+    
+    const changeParent = async (_id, regionName) => {
+        let cursor = regions[_id];
+        while(cursor.parent.valueOf() !== "".valueOf()){
+            cursor = regions[cursor.parent];
+        }
+        let stack = [];
+        stack.push(cursor._id);
+        let parentId = "";
+        while (stack.length > 0){
+            let region = regions[stack.pop()];
+            if (region.name.valueOf() == regionName.valueOf()){
+                parentId = region._id;
+                break;
+            }
+            stack.push(...region.children);
+        }
+        if (parentId.valueOf() == regions[_id].parent.valueOf() || parentId.length === 0 || parentId.valueOf() == _id.valueOf()){
+            return false;
+        }
+        const transaction = new ChangeParent_Transaction(_id, parentId, regions[_id].parent, ChangeParent);
+        await props.tps.addTransaction(transaction);
+        tpsRedo();
+        return true;
+    }
 
     return(
         <>
@@ -207,7 +233,7 @@ const Homescreen = (props) => {
                 addSubregion={addSubregion} toggleDelete={toggleShowDelete} changeDeleteFunc={changeDeleteFunc} toggleCreateMap={toggleShowCreateMap}
                 updateAccess={UpdateAccess} sortRegions={sortRegions} updateField={updateField} tpsRedo={tpsRedo} tpsUndo={tpsUndo} 
                 deleteRegion={deleteRegion} canUndo={props.tps.hasTransactionToUndo()} canRedo={props.tps.hasTransactionToRedo()}
-                addLandmark={addLandmark} removeLandmark={removeLandmark} editLandmark={editLandmark}> 
+                addLandmark={addLandmark} removeLandmark={removeLandmark} editLandmark={editLandmark} changeParent={changeParent}> 
                 </MainContents>:
                 <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
                     Welcome To the World Data Mapper

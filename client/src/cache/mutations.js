@@ -111,3 +111,9 @@ export const EDIT_LANDMARK = gql`
 		editLandmark(_id: $_id, value: $value, index: $index)
 	}
 `
+
+export const CHANGE_PARENT = gql`
+	mutation ChangeParent($_id: String!, $parentId: String!, $index: Int!){
+		changeParent(_id: $_id, parentId: $parentId, index: $index)
+	}
+`
