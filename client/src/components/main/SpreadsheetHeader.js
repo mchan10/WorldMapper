@@ -20,23 +20,25 @@ const SpreadsheetHeader = (props) => {
         canSort = false;
     }
 
+    const disableFunc = () => {}
+
     return(
         <WRow style={{height:"100%"}}>
             <WCol size="1" style={style}></WCol>
             <WCol size="2" style={style}> 
                 <span style={{ gridRow: "1 / 1"}}> Name </span> 
-                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:"pointer", color:canSort?"white":"black"}} 
-                onClick={() => props.sortRegions(currentRegion, "name")}> arrow_downward </i>
+                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:canSort?"pointer":"default", color:canSort?"white":"black"}} 
+                onClick={canSort ? () => props.sortRegions(currentRegion, "name") : disableFunc}> arrow_downward </i>
             </WCol>
             <WCol size="2" style={style}> 
                 <span style={{ gridRow: "1 / 1"}}> Capital </span> 
-                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:"pointer", color:canSort?"white":"black"}} 
-                onClick={() => props.sortRegions(currentRegion, "capital")}> arrow_downward </i>
+                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:canSort?"pointer":"default", color:canSort?"white":"black"}} 
+                onClick={canSort ? () => props.sortRegions(currentRegion, "capital") : disableFunc}> arrow_downward </i>
             </WCol>
             <WCol size="2" style={style}>
                 <span style={{ gridRow: "1 / 1"}}> Leader </span> 
-                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:"pointer", color:canSort?"white":"black"}} 
-                onClick={() => props.sortRegions(currentRegion, "leader")}> arrow_downward </i>
+                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:canSort?"pointer":"default", color:canSort?"white":"black"}} 
+                onClick={canSort ? () => props.sortRegions(currentRegion, "leader") : disableFunc}> arrow_downward </i>
             </WCol>
             <WCol size="1" style={style}> Flag </WCol>
             <WCol size="4" style={style}> Landmarks </WCol>
