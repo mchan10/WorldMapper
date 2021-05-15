@@ -8,23 +8,36 @@ const SpreadsheetHeader = (props) => {
         alignItems:"center", 
         color:"white"
     }
-    const styleSort = {
-        display:"grid", 
-        alignItems:"center", 
-        color:"white",
-        cursor:"pointer"
-    }
     const location = useLocation();
     const path = location.pathname;
     const split = path.split("/")
     const currentRegion = split[split.length - 1];
+    let canSort = false;
+    if (props.regions[currentRegion].children.length > 0){
+        canSort = true;
+    }
+    else{
+        canSort = false;
+    }
 
     return(
         <WRow style={{height:"100%"}}>
             <WCol size="1" style={style}></WCol>
-            <WCol size="2" style={styleSort} onClick={() => props.sortRegions(currentRegion, "name")}> Name </WCol>
-            <WCol size="2" style={styleSort} onClick={() => props.sortRegions(currentRegion, "capital")}> Capital </WCol>
-            <WCol size="2" style={styleSort} onClick={() => props.sortRegions(currentRegion, "leader")}> Leader </WCol>
+            <WCol size="2" style={style}> 
+                <span style={{ gridRow: "1 / 1"}}> Name </span> 
+                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:"pointer", color:canSort?"white":"black"}} 
+                onClick={() => props.sortRegions(currentRegion, "name")}> arrow_downward </i>
+            </WCol>
+            <WCol size="2" style={style}> 
+                <span style={{ gridRow: "1 / 1"}}> Capital </span> 
+                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:"pointer", color:canSort?"white":"black"}} 
+                onClick={() => props.sortRegions(currentRegion, "capital")}> arrow_downward </i>
+            </WCol>
+            <WCol size="2" style={style}>
+                <span style={{ gridRow: "1 / 1"}}> Leader </span> 
+                <i className="material-icons" style={{gridRow: "1 / 1", width:"24px", cursor:"pointer", color:canSort?"white":"black"}} 
+                onClick={() => props.sortRegions(currentRegion, "leader")}> arrow_downward </i>
+            </WCol>
             <WCol size="1" style={style}> Flag </WCol>
             <WCol size="4" style={style}> Landmarks </WCol>
         </WRow>

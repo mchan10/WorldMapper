@@ -55,7 +55,7 @@ const MainContents = (props) => {
                             <div style={{backgroundColor:"#e3dede", width:"100%", height:"100%",left:"50%",top:"50%",position:"relative",transform: "translate(-50%, -50%)"}}>
                                 <WLayout wLayout="header">
                                     <WLHeader style={{backgroundColor:"red"}}>
-                                        <SpreadsheetHeader sortRegions={props.sortRegions}></SpreadsheetHeader>
+                                        <SpreadsheetHeader sortRegions={props.sortRegions} regions={props.regions}></SpreadsheetHeader>
                                     </WLHeader>
                                     <WLMain style={{overflow:"auto"}}>
                                         <SpreadsheetTable moveTo={props.moveTo} regions={props.regions} updateField={props.updateField} 
