@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GET_DB_MAPS, GET_DB_REGIONS } from '../../cache/queries.js';
 import * as mutations from '../../cache/mutations.js';
 import { WLayout, WLHeader, WLMain, WNavbar, WNavItem } from 'wt-frontend';
@@ -228,6 +228,24 @@ const Homescreen = (props) => {
         tpsRedo();
         return true;
     }
+
+    const keyboardHandle = (event) => {
+		if (event.ctrlKey){
+			if (event.which === 90){
+				tpsUndo();
+			}
+			else if (event.which === 89){
+				tpsRedo();
+		  	}
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener("keydown", keyboardHandle, false);
+		return () => {
+			document.removeEventListener("keydown", keyboardHandle, false);
+		}
+	});
 
     return(
         <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { WLMain, WLayout, WLFooter, WLHeader, WRow, WCol, WInput } from 'wt-frontend';
 import ViewerEntry from './ViewerEntry.js';
 import { useLocation } from 'react-router-dom'; 
@@ -36,6 +36,19 @@ const ViewerLandmarks = (props) => {
             toggleError(true);
         }
     }
+
+    const keyboardHandle = (e) => {
+		if (e.key === "Enter"){
+            addInput();
+        }
+	}
+
+	useEffect(() => {
+		document.addEventListener("keydown", keyboardHandle, false);
+		return () => {
+			document.removeEventListener("keydown", keyboardHandle, false);
+		}
+	});
 
     return(
         <WLMain style={{marginLeft:"45%", width:"50%"}}>
