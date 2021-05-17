@@ -42,7 +42,7 @@ const ViewerRegion = (props) => {
         <WLSide>
             <WCard wLayout="media-content" style={{height:"100%",width:"100%"}}>
                 <WCMedia>
-                    <img src={image ? image.default: null} alt="No Flag" />
+                    <img src={image ? image.default: null} alt="No Flag" style={{height:"100%", width:"100%"}}/>
                 </WCMedia>
                 <WCContent style={{backgroundColor:"#4b4a4a"}}>
                     <div>&nbsp;</div>
