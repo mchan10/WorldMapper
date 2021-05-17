@@ -85,7 +85,7 @@ const SpreadsheetEntry = (props) => {
                 <WInput defaultValue={currentRegion.name} name="name" autoFocus onBlur={handleFieldChange} id={props.region}>
                 </WInput>
                 :
-                <WButton onClick={props.moveTo} hoverAnimation="darken" style={{width:"95%"}}>
+                <WButton onClick={props.moveTo} hoverAnimation="darken" style={{width:"95%",color:"blue"}}>
                     {currentRegion.name}
                 </WButton>}
             </WCol>
@@ -113,7 +113,7 @@ const SpreadsheetEntry = (props) => {
                 <img src={image ? image.default: null} alt="No Flag" style={{height:"70%", width:"44%"}}/>
             </WCol>
             <WCol size="4" style={{display:"grid", alignItems:"center"}}> 
-                <WButton onClick={props.moveViewer} hoverAnimation="darken" style={{height:"100%"}}>
+                <WButton onClick={props.moveViewer} hoverAnimation="darken" style={{height:"100%", color:"blue"}}>
                     {currentRegion.landmarks.join()}
                 </WButton>
             </WCol>

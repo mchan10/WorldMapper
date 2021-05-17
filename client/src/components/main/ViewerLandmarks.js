@@ -72,7 +72,7 @@ const ViewerLandmarks = (props) => {
                             <i className="material-icons" style={{color:"green", cursor:"pointer"}} onClick={addInput}>add</i>
                         </WCol>
                         <WCol size="11">
-                            <WInput onBlur={updateInput}></WInput>
+                            <WInput onBlur={updateInput} onChange={updateInput}></WInput>
                         </WCol>
                     </WRow>
                     {errorMessage ?
