@@ -37,7 +37,7 @@ const MapEntry = (props) => {
                     </WInput>
                 </WCol>
                 :
-                <WCol size="11" style={{borderStyle:"hidden solid solid hidden"}} onClick={handleMove}>
+                <WCol size="11" style={{borderStyle:"hidden solid solid hidden", cursor:"pointer"}} onClick={handleMove}>
                     {props.map.name}
                 </WCol>
             }
