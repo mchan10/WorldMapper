@@ -110,7 +110,7 @@ const SpreadsheetEntry = (props) => {
                 }
             </WCol>
             <WCol size="1" style={{display:"grid", alignItems:"center"}}>
-                {<img src={image ? image.default: null} alt="No Flag" style={{height:"70%", width:"44%"}}/>}
+                <img src={image ? image.default: null} alt="No Flag" style={{height:"70%", width:"44%"}}/>
             </WCol>
             <WCol size="4" style={{display:"grid", alignItems:"center"}}> 
                 <WButton onClick={props.moveViewer} hoverAnimation="darken" style={{height:"100%"}}>

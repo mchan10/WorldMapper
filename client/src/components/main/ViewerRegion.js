@@ -3,6 +3,7 @@ import { WCard, WLSide, WCContent, WCMedia, WInput } from 'wt-frontend';
 import { useLocation } from 'react-router-dom'; 
 
 const ViewerRegion = (props) => {
+    const [image, changeImage] = useState(null);
     const [editing, toggleEdit] = useState(false);
     const location = useLocation();
     const path = location.pathname;
@@ -14,6 +15,17 @@ const ViewerRegion = (props) => {
     parentPath.pop();
     parentPath = (parentPath.join("/"))
     parentPath = parentPath.replace("viewer","spreadsheet");
+    let pathBuilder = [];
+    for (let i = 2; i < split.length; i++){
+        pathBuilder.push(props.regions[split[i]].name);
+    }
+    let flagPath = pathBuilder.join("/");
+    flagPath = flagPath + " Flag.png";
+    console.log(flagPath);
+    const importFile = async () => {
+        await changeImage(await import(`./../../assets/${flagPath}`).catch((e)=>{console.log("no img")}));
+    }
+    importFile();
 
     const handleChangeParent = async (e) => {
         await props.changeParent(currentRegion, e.target.value);
@@ -23,7 +35,9 @@ const ViewerRegion = (props) => {
     return(
         <WLSide>
             <WCard wLayout="media-content" style={{height:"100%",width:"100%"}}>
-                <WCMedia>image</WCMedia>
+                <WCMedia>
+                    <img src={image ? image.default: null} alt="No Flag" />
+                </WCMedia>
                 <WCContent style={{backgroundColor:"#4b4a4a"}}>
                     <div>&nbsp;</div>
                     <div style={{color:"white",fontWeight:"bold"}}>{"Region Name: " + region.name}</div>
