@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 const ViewerRegion = (props) => {
     const [image, changeImage] = useState(null);
     const [editing, toggleEdit] = useState(false);
+    const [parentError, toggleParentError] = useState(false);
     const location = useLocation();
     const path = location.pathname;
     const split = path.split("/")
@@ -21,15 +22,20 @@ const ViewerRegion = (props) => {
     }
     let flagPath = pathBuilder.join("/");
     flagPath = flagPath + " Flag.png";
-    console.log(flagPath);
     const importFile = async () => {
         await changeImage(await import(`./../../assets/${flagPath}`).catch((e)=>{console.log("no img")}));
     }
     importFile();
 
     const handleChangeParent = async (e) => {
-        await props.changeParent(currentRegion, e.target.value);
+        const success = await props.changeParent(currentRegion, e.target.value);
         toggleEdit(false);
+        if (success){
+            toggleParentError(false);
+        }
+        else{
+            toggleParentError(true);
+        }
     }
 
     return(
@@ -51,6 +57,12 @@ const ViewerRegion = (props) => {
                         <i className="material-icons" style={{color:"white", cursor:"pointer"}} onClick={() => toggleEdit(true)}>edit</i>
                     </div>
                     <div>&nbsp;</div>
+                    {parentError ? 
+                    <>
+                    <div> Error changing parents: make sure the name is correct and that you are not changing parent to itself of a child of itself</div>
+                    <div>&nbsp;</div> 
+                    </>
+                    : null}
                     <div style={{color:"white",fontWeight:"bold"}}>{"Region Capital: " + region.capital}</div>
                     <div>&nbsp;</div>
                     <div style={{color:"white",fontWeight:"bold"}}>{"Region Leader: " + region.leader}</div>
