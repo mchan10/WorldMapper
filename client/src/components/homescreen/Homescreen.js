@@ -13,6 +13,7 @@ import UpdateAccount from '../modals/UpdateAccount.js';
 import Delete from '../modals/Delete.js'
 import CreateMap from '../modals/CreateMap.js';
 import { SortRegions_Transaction, UpdateField_Transaction, AddRegion_Transaction, DeleteRegion_Transaction, AddLandmark_Transaction, RemoveLandmark_Transaction, EditLandmark_Transaction, ChangeParent_Transaction } from '../../utils/jsTPS.js';
+import mapglobe from "./../../assets/mapglobe.png";
 
 const Homescreen = (props) => {
     const auth = props.user === null ? false : true;
@@ -280,8 +281,11 @@ const Homescreen = (props) => {
                 deleteRegion={deleteRegion} canUndo={props.tps.hasTransactionToUndo()} canRedo={props.tps.hasTransactionToRedo()}
                 addLandmark={addLandmark} removeLandmark={removeLandmark} editLandmark={editLandmark} changeParent={changeParent}> 
                 </MainContents>:
-                <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle", marginTop:"25%"}}> 
-                    Welcome To the World Data Mapper
+                <div>
+                    <img src={mapglobe} alt="no" style={{display: "block", marginLeft:"auto", marginRight:"auto",marginTop:"15%"}}/>
+                    <div style={{color:"white", textAlign:"center", height:"25%%", verticalAlign:"middle"}}> 
+                        Welcome To the World Data Mapper
+                    </div>
                 </div>}
             </WLMain>
             {showLogin ? <Login fetchUser={props.fetchUser} toggleLogin={toggleShowLogin} refetch={refetchData}> </Login> : null}

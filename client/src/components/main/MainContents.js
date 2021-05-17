@@ -8,9 +8,11 @@ import SpreadsheetHeader from './SpreadsheetHeader.js';
 import ViewerHeader from './ViewerHeader.js';
 import ViewerRegion from './ViewerRegion.js';
 import ViewerLandmarks from './ViewerLandmarks.js';
+import mapglobe from "./../../assets/mapglobe.png"
 
 const MainContents = (props) => {
-
+    let path = "./../../../public/The World/Africa/Algeria Flag.png";
+    //const file = import(path);
     return (
         <>
         {props.auth ? 
@@ -31,7 +33,7 @@ const MainContents = (props) => {
                         <WLSide>
                             <WCard wLayout="content-footer" style={{width:"100%", height:"100%"}}>
                                 <WCContent>
-                                    img
+                                    <img src={mapglobe} alt="no" />   
                                 </WCContent>
                                 <WCFooter>
                                     <WButton style={{backgroundColor:"red", width:"100%", justifyContent:"center", height:"100%"}} onClick={() => props.toggleCreateMap(true)}>
