@@ -11,8 +11,6 @@ import ViewerLandmarks from './ViewerLandmarks.js';
 import mapglobe from "./../../assets/mapglobe.png"
 
 const MainContents = (props) => {
-    let path = "./../../../public/The World/Africa/Algeria Flag.png";
-    //const file = import(path);
     return (
         <>
         {props.auth ? 

@@ -9,7 +9,11 @@ const SpreadsheetTable = (props) => {
     const path = location.pathname;
     const split = path.split("/")
     const currentRegion = split[split.length - 1];
-
+    let pathBuilder = [];
+    for (let i = 2; i < split.length; i++){
+        pathBuilder.push(props.regions[split[i]].name);
+    }
+    let flagPath = pathBuilder.join("/");
     return(
         <>
             {props.regions[currentRegion].children.map((region, index) => (
@@ -17,7 +21,7 @@ const SpreadsheetTable = (props) => {
                 moveViewer={() => props.moveTo((path + "/" + region).replace("spreadsheet","viewer"))} inputRow={inputRow} inputCol={inputCol}
                 index={index} setInputRow={setInputRow} setInputCol={setInputCol} length={props.regions[currentRegion].children.length}
                 updateField={props.updateField} deleteRegion={props.deleteRegion} changeDeleteFunc={props.changeDeleteFunc} 
-                toggleDelete={props.toggleDelete}>
+                toggleDelete={props.toggleDelete} flagPath={flagPath}>
                 </SpreadsheetEntry>
             ))}
         </>

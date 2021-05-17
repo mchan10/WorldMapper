@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { WRow, WCol, WButton, WInput } from 'wt-frontend';
 
 const SpreadsheetEntry = (props) => {
+    const [image, changeImage] = useState(null);
     const currentRegion = props.regions[props.region];
     const selected = props.index === props.inputRow;
+    let flagPath = props.flagPath + "/" + currentRegion.name + " Flag.png";
+    const importFile = async () => {
+        await changeImage(await import(`./../../assets/${flagPath}`).catch((e)=>{console.log("no img")}));
+    }
+    importFile();
 
     const handleFieldChange = async (e) => {
         const field = e.target.name;
@@ -104,7 +110,7 @@ const SpreadsheetEntry = (props) => {
                 }
             </WCol>
             <WCol size="1" style={{display:"grid", alignItems:"center"}}>
-                flag
+                {<img src={image ? image.default: null} alt="No Flag" style={{height:"70%", width:"44%"}}/>}
             </WCol>
             <WCol size="4" style={{display:"grid", alignItems:"center"}}> 
                 <WButton onClick={props.moveViewer} hoverAnimation="darken" style={{height:"100%"}}>
