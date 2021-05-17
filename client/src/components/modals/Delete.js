@@ -21,7 +21,7 @@ const Delete = (props) => {
             Delete
         </WMHeader>
         <WMMain style={{backgroundColor:"black", color:"white"}}>
-            Are you sure? All Subregions will be deleted if you do this.
+            Are you sure you want to delete this? It may affect other regions.
         </WMMain>
         <WMFooter style={{backgroundColor:"black"}}>
             <WButton onClick={handleDelete} style={{height:"100%", width:"100%", justifyContent:"center"}}>

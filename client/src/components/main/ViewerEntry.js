@@ -19,11 +19,16 @@ const ViewerEntry = (props) => {
         toggleEditing(false);
     }
 
+    const handleDelete = () => {
+        props.changeDeleteFunc(() => removeLandmark);
+        props.toggleDelete(true);
+    }
+
     return(
         <WRow style={{height:"5%"}}>
             <WCol size="1">
                 {props.delete ? 
-                <i className="material-icons" style={{color:"red", cursor:"pointer"}} onClick={removeLandmark} >close</i>
+                <i className="material-icons" style={{color:"red", cursor:"pointer"}} onClick={handleDelete} >close</i>
                 : null}
             </WCol>
             <WCol size="1">

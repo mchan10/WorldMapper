@@ -60,7 +60,8 @@ const ViewerLandmarks = (props) => {
                 <WLMain style={{overflow:"auto", backgroundColor:"black"}}>
                     {region.landmarks.map((landmark,index) => (
                         <ViewerEntry name={landmark} key={index} delete={true} region={currentRegion} index={index} 
-                        removeLandmark={props.removeLandmark} editLandmark={props.editLandmark} toggleErrorEdit={toggleErrorEdit}></ViewerEntry>
+                        removeLandmark={props.removeLandmark} editLandmark={props.editLandmark} toggleErrorEdit={toggleErrorEdit}
+                        changeDeleteFunc={props.changeDeleteFunc} toggleDelete={props.toggleDelete}></ViewerEntry>
                     ))}
                     {accum.map((landmark, index) => (
                         <ViewerEntry name={landmark} key={index} delete={false} ></ViewerEntry>
